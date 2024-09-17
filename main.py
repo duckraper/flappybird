@@ -4,8 +4,9 @@ from src.core.game import Game
 
 def main():
     pg.init()
+    pg.font.init()
 
-    game = Game(title='Flappy Bird')
+    game = Game()
     game.run()
 
     sys.exit(0)
