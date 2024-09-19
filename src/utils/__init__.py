@@ -1,2 +1,2 @@
-from .debugger import Debug
 from .constants import *
+from .debugger import Debug

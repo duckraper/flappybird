@@ -1,9 +1,10 @@
 import pygame as pg
-from src.core.mixins import EventManagerMixin, SpriteManagerMixin
+
 from src.core.generics import BaseGame
+from src.core.mixins import EventManagerMixin, SpriteManagerMixin
 from src.core.settings import FPS
-from src.utils import Debug, BASE_COLOR
 from src.scenes import MainMenuScene
+from src.utils import Debug, BASE_COLOR
 
 
 class Game(EventManagerMixin,

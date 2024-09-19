@@ -1,7 +1,7 @@
-from abc import ABCMeta
+from abc import ABC, abstractmethod
 
 import pygame as pg
-from abc import ABC, abstractmethod
+
 from src.core.settings import SCREEN_SIZE, GAME_TITLE
 
 

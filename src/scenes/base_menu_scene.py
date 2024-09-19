@@ -1,12 +1,15 @@
-import pygame as pg
-from enum import IntEnum, Enum
 from abc import ABC
+from enum import IntEnum, Enum
+
+import pygame as pg
+
 from src.core.mixins import MenuActionHandlerMixin
 from src.utils.helpers import is_pressed, get_font
 from . import BaseScene
 from ..utils import COLORS
 
 UP, DOWN = (-1, 1)
+
 
 class BaseMenuScene(BaseScene,
                     MenuActionHandlerMixin,
@@ -35,7 +38,7 @@ class BaseMenuScene(BaseScene,
         return font.render(text, True, color)
 
     def get_option_font_surface_by_index(
-            self, index: Enum, color: str | tuple= 'black', font_size: int=30) -> pg.surface.Surface:
+            self, index: Enum, color: str | tuple = 'black', font_size: int = 30) -> pg.surface.Surface:
         if isinstance(color, str):
             try:
                 color = COLORS[color]
@@ -49,7 +52,7 @@ class BaseMenuScene(BaseScene,
     def _update_selected_option(self, direction: int):
         self.selected_option = (((self.selected_option + direction - 1)
                                  % len(self.menu_option))
-                                 + 1)
+                                + 1)
 
     def get_input(self):
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))

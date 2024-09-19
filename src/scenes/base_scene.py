@@ -1,5 +1,5 @@
-import pygame as pg
 from abc import ABC, abstractmethod
+
 
 class BaseScene(ABC):
     def __init__(self, game):

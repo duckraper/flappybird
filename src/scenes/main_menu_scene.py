@@ -1,8 +1,4 @@
-import pygame as pg
 from .base_menu_scene import BaseMenuScene
-from src.core.settings import SCREEN_SIZE
-from src.utils.helpers import get_font
-from ..utils import COLORS
 
 
 class MainMenuScene(BaseMenuScene):

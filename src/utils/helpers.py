@@ -1,7 +1,10 @@
-import pygame as pg
 from pathlib import Path
-from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE
+
+import pygame as pg
+
 from src.core.settings import KEY_BINDINGS
+from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE
+
 
 def is_pressed(events, key: str = 'any') -> bool:
     try:
@@ -15,19 +18,23 @@ def is_pressed(events, key: str = 'any') -> bool:
 
     return False
 
-def get_font(font_name: str='Pixeled.ttf',
-             font_size: int=DEFAULT_FONT_SIZE) -> pg.font.Font:
+
+def get_font(font_name: str = 'Pixeled.ttf',
+             font_size: int = DEFAULT_FONT_SIZE) -> pg.font.Font:
     return pg.font.Font(FONTS_DIR.joinpath(font_name), font_size)
+
 
 def is_between(value: float | int, minimum: int, maximum: int):
     return minimum <= value <= maximum
 
+
 def load_image(filepath: Path | str) -> pg.surface.Surface:
     return pg.image.load(filepath).convert_alpha()
 
+
 def load_sprites(directory: Path | str,
                  file_pattern: str,
-                 size: tuple[int, int]=DEFAULT_SPRITE_SIZE,
+                 size: tuple[int, int] = DEFAULT_SPRITE_SIZE,
                  colorkey=None) -> list[pg.surface.Surface]:
     """
      Usage:

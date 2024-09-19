@@ -1,11 +1,13 @@
-import pygame as pg
 from pathlib import Path
-from src.core.settings import SCREEN_SIZE, SCREEN_HEIGHT
+
+import pygame as pg
+
+from src.core.settings import SCREEN_HEIGHT
 
 BASE_DIR = Path(__file__).resolve().parent.parent  # src/
 ASSETS_DIR = BASE_DIR.joinpath('assets')  # src/assets
 
-DEFAULT_SPRITE_SIZE: tuple[int, int] = (SCREEN_HEIGHT//15, SCREEN_HEIGHT//15)
+DEFAULT_SPRITE_SIZE: tuple[int, int] = (SCREEN_HEIGHT // 15, SCREEN_HEIGHT // 15)
 
 DEFAULT_FONT_SIZE = 20
 FONTS_DIR = BASE_DIR.parent.joinpath('assets', 'fonts')  # ../assets/fonts

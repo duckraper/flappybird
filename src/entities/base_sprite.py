@@ -1,5 +1,6 @@
 import pygame as pg
 
+
 class BaseSprite(pg.sprite.Sprite):
     def __init__(self, image: pg.Surface, x: int, y: int):
         super().__init__()

@@ -1,3 +1,3 @@
 from .event_manager_mixin import EventManagerMixin
-from .sprites_manager_mixin import SpriteManagerMixin
 from .menus_action_handler_mixin import MenuActionHandlerMixin
+from .sprites_manager_mixin import SpriteManagerMixin
