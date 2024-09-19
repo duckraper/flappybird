@@ -1,8 +1,12 @@
+from abc import ABCMeta
+
 import pygame as pg
+from abc import ABC, abstractmethod
 from src.core.settings import SCREEN_SIZE, GAME_TITLE
 
+
 # abstract class
-class BaseGame:
+class BaseGame(ABC):
     def __init__(self, *args, **kwargs):
         self.running: bool = False
         self.screen: pg.surface.Surface = pg.display.set_mode(SCREEN_SIZE)
@@ -25,8 +29,10 @@ class BaseGame:
     def get_screen(self):
         return self.screen
 
+    @abstractmethod
     def update(self):
         pass
 
+    @abstractmethod
     def run(self):
         pass

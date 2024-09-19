@@ -18,6 +18,8 @@ class Game(EventManagerMixin,
         self.bird = pg.sprite.GroupSingle()
         self.scene = MainMenuScene(game=self)
 
+        self.high_score = 0
+
     def startup(self):
         super().startup()
 
@@ -28,13 +30,13 @@ class Game(EventManagerMixin,
         self.screen.fill(BASE_COLOR)
         self.scene.draw()
         self.draw_all_sprites()
-        self.debugger.draw(info=self.scene.selected_option)
+        self.debugger.draw(info=self.scene.selected_option_name)
         # TODO terminar de implementar el menu
 
         pg.display.flip()
 
     def update(self):
-        self.process_events()
+        self.process_events_but_input()
         self.update_all_sprites()
         self.scene.update()
 

@@ -3,10 +3,17 @@ from pathlib import Path
 from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE
 from src.core.settings import KEY_BINDINGS
 
-def is_pressed(key: str='any') -> bool:
-    if key == 'any':
-        return any(pg.key.get_pressed())
-    return pg.key.get_pressed()[KEY_BINDINGS[key]]
+def is_pressed(events, key: str = 'any') -> bool:
+    try:
+        for event in events:
+            if event.type == pg.KEYDOWN:
+                if key == 'any':
+                    return True
+                return event.key == KEY_BINDINGS.get(key)
+    except KeyError as e:
+        raise ValueError(f"Key '{key}' not found in KEY_BINDINGS")
+
+    return False
 
 def get_font(font_name: str='Pixeled.ttf',
              font_size: int=DEFAULT_FONT_SIZE) -> pg.font.Font:
