@@ -21,14 +21,16 @@ class BaseMenuScene(BaseScene,
         self.menu_option = IntEnum('Option', options)
         self.selected_option = 1
 
+        self.startup()
+
     @property
     def selected_option_name(self) -> str:
         return self.menu_option(self.selected_option).name
 
-    @property
-    def title_font_surface(self) -> pg.surface.Surface:
+
+    def get_title_font_surface(self, font_size=70) -> pg.surface.Surface:
         return self._create_font_surface(
-            self.menu_title, 70, COLORS['black']
+            self.menu_title, font_size, COLORS['black']
         )
 
     @staticmethod
@@ -54,6 +56,9 @@ class BaseMenuScene(BaseScene,
                                  % len(self.menu_option))
                                 + 1)
 
+    def update(self):
+        self.get_input()
+
     def get_input(self):
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))
 
@@ -63,4 +68,4 @@ class BaseMenuScene(BaseScene,
             self._update_selected_option(DOWN)
         elif is_pressed(keydown_events, 'enter'):
             # calls the function f'perform_{action}'
-            self.call_method(self.selected_option_name.lower())
+            self.call_method(self.selected_option_name)

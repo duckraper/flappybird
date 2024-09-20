@@ -1,16 +1,21 @@
 import pygame as pg
 
+from abc import ABC, abstractmethod
 
-class BaseSprite(pg.sprite.Sprite):
+
+class BaseSprite(pg.sprite.Sprite,
+                 ABC):
     def __init__(self, image: pg.Surface, x: int, y: int):
         super().__init__()
         self.image: pg.Surface = image
-        self.rect: pg.Rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.x = x
+        self.y = y
+        self.rect: pg.Rect = self.image.get_rect(center=(self.x, self.y))
 
-    def update(self):
+    @abstractmethod
+    def update(self, delta):
         pass
 
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)
+    # @abstractmethod
+    # def draw(self, screen: pg.surface.Surface):
+    #     pass

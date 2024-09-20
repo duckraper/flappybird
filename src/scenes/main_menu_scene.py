@@ -1,10 +1,13 @@
 from .base_menu_scene import BaseMenuScene
+from .game_scene import GameScene
 
 
 class MainMenuScene(BaseMenuScene):
     def __init__(self, game):
         options_list = [
             "Start",
+            "Settings",
+            "High Scores",
             "Quit"
         ]
         super().__init__(game, game.title, *options_list)
@@ -17,8 +20,9 @@ class MainMenuScene(BaseMenuScene):
         self._draw_options(screen, screen_width, screen_height)
 
     def _draw_title(self, screen, screen_width, screen_height):
-        title_rect = self.title_font_surface.get_rect(center=self._title_axis(screen_width, screen_height))
-        screen.blit(self.title_font_surface, title_rect)
+        title_surface = self.get_title_font_surface(75)
+        title_rect = title_surface.get_rect(center=self._title_axis(screen_width, screen_height))
+        screen.blit(title_surface, title_rect)
 
     def _title_axis(self, screen_width, screen_height) -> tuple[int, int]:
         title_x = screen_width // 2
@@ -33,7 +37,7 @@ class MainMenuScene(BaseMenuScene):
                                                                 color=option_color,
                                                                 font_size=option_font_size)
             option_rect = option_text.get_rect(
-                center=(screen_width // 2, screen_height // 2 + option_index * 60)
+                center=(screen_width // 2, screen_height // 2.5 + option_index * 60)
             )
             screen.blit(option_text, option_rect)
 
@@ -48,7 +52,13 @@ class MainMenuScene(BaseMenuScene):
         return option_color, option_font_size
 
     def perform_start(self):
-        print('starting...')
+        self.game.set_scene(GameScene(game=self.game))
+
+    def perform_high_scores(self):
+        raise NotImplementedError
+
+    def perform_settings(self):
+        raise NotImplementedError
 
     def perform_quit(self):
         self.game.stop_running()

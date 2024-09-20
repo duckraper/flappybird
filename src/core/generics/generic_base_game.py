@@ -14,8 +14,6 @@ class BaseGame(ABC):
         self.title = kwargs.get('title', GAME_TITLE)
         self.icon: pg.surface.Surface = kwargs.get('icon', None)
 
-        self.startup()
-
     def startup(self):
         pg.display.set_caption(self.title)
         pg.display.set_icon(self.icon) if self.icon else None

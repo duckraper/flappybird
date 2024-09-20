@@ -6,12 +6,14 @@ from src.core.settings import KEY_BINDINGS
 from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE
 
 
-def is_pressed(events, key: str = 'any') -> bool:
+def is_pressed(events, key: str | list[str] = 'any') -> bool:
     try:
         for event in events:
             if event.type == pg.KEYDOWN:
                 if key == 'any':
                     return True
+                if isinstance(key, list):
+                    return any(event.key == KEY_BINDINGS.get(k) for k in key)
                 return event.key == KEY_BINDINGS.get(key)
     except KeyError as e:
         raise ValueError(f"Key '{key}' not found in KEY_BINDINGS")

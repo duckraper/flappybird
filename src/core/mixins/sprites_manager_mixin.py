@@ -1,8 +1,10 @@
+from pygame.sprite import Group
+
 class SpriteManagerMixin:
     def update_all_sprites(self):
-        sprites = self.get_all_sprites()
-        sprites.update()
+        sprites: Group = self.sprites
+        sprites.update(delta=self.game.delta)
 
     def draw_all_sprites(self):
-        sprites = self.get_all_sprites()
-        sprites.draw(self.get_screen())
+        sprites: Group = self.sprites
+        sprites.draw(self.game.screen)

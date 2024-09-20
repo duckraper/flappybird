@@ -12,8 +12,9 @@ MUSIC_VOLUME = 0.5
 SFX_VOLUME = 0.7
 
 KEY_BINDINGS = {
-    'jump': pg.K_SPACE,
-    'pause': pg.K_p,
+    'space': pg.K_SPACE,
+    'p': pg.K_p,
+    'w': pg.K_w,
     'up': pg.K_UP,
     'down': pg.K_DOWN,
     'left': pg.K_LEFT,
@@ -22,8 +23,8 @@ KEY_BINDINGS = {
 }
 
 DIFFICULTY_LEVELS = {
-    'easy': {'speed': 5, 'spawn_rate': 3},
-    'medium': {'speed': 7, 'spawn_rate': 2},
+    'easy': {'speed': 5, 'spawn_rate': 4},
+    'medium': {'speed': 7, 'spawn_rate': 3},
     'hard': {'speed': 10, 'spawn_rate': 1},
     'insane': {'speed': 15, 'spawn_rate': 1}
 }
