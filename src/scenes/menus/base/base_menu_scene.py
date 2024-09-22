@@ -1,14 +1,11 @@
 from abc import ABC
-from enum import IntEnum, Enum
+from enum import IntEnum
 
 import pygame as pg
 
 from src.scenes.menus.mixins import MenuActionHandlerMixin, MenuRenderMixin
-from src.utils.helpers import is_pressed, get_font, get_color, render_text_with_outline
+from src.utils.helpers import is_pressed
 from src.scenes.base.base_scene import BaseScene
-from src.utils.constants import DEFAULT_TITLE_FONT_SIZE, DEFAULT_TITLE_FONT_COLOR, DEFAULT_OPTION_FONT_COLOR, \
-    DEFAULT_OPTION_FONT_SIZE, DEFAULT_HOVER_OPTION_FONT_COLOR, DEFAULT_HOVER_OPTION_FONT_SIZE, \
-    DEFAULT_OPTIONS_OFFSET, DEFAULT_OUTLINE_WIDTH, DEFAULT_SHADOW_WIDTH, DEFAULT_OUTLINE_COLOR
 
 UP, DOWN = (-1, 1)
 

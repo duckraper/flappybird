@@ -2,7 +2,7 @@ import pygame as pg
 
 from src.scenes.base.base_scene import BaseScene
 from src.scenes.menus.pause_menu_scene import PauseMenuScene
-from src.scenes.mixins.sprites_manager_mixin import SpriteManagerMixin
+from src.scenes.game.mixins.sprites_manager_mixin import SpriteManagerMixin
 from src.core.settings import DIFFICULTY_LEVELS
 from src.utils.helpers import is_pressed
 from src.entities.bird import Bird
