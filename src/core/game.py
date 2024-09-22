@@ -1,10 +1,11 @@
 import pygame as pg
 
-from src.core.generics import BaseGame
-from src.core.mixins import EventManagerMixin, SpriteManagerMixin, SceneManagerMixin
+from src.core.base import BaseGame
+from src.core.mixins import EventManagerMixin, SceneManagerMixin
 from src.core.mixins.delta_time_manager_mixin import DeltaTimeManagerMixin
-from src.core.settings import FPS, DIFFICULTY_LEVELS
-from src.scenes import MainMenuScene
+from src.core.settings import FPS
+from src.scenes.menus.main_menu_scene import MainMenuScene
+from src.scenes.menus.pause_menu_scene import PauseMenuScene
 from src.utils import Debug, BASE_COLOR
 
 
@@ -26,6 +27,10 @@ class Game(EventManagerMixin,
         super().startup()
 
         self.set_scene(MainMenuScene(game=self))
+
+    @property
+    def is_paused(self) -> bool:
+        return isinstance(self.scene, PauseMenuScene)
 
     def perform_rendering(self):
         self.screen.fill(BASE_COLOR)

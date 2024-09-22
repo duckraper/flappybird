@@ -2,7 +2,7 @@ import pygame as pg
 
 FPS = 60
 
-GAME_TITLE = 'Flappy Bird'
+GAME_TITLE = 'FlappyBird'
 
 SCREEN_WIDTH: int = 800
 SCREEN_HEIGHT: int = 600
@@ -12,9 +12,11 @@ MUSIC_VOLUME = 0.5
 SFX_VOLUME = 0.7
 
 KEY_BINDINGS = {
+    'esc': pg.K_ESCAPE,
     'space': pg.K_SPACE,
     'p': pg.K_p,
     'w': pg.K_w,
+    'q': pg.K_q,
     'up': pg.K_UP,
     'down': pg.K_DOWN,
     'left': pg.K_LEFT,

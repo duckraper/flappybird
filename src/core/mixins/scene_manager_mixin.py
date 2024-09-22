@@ -1,10 +1,14 @@
-from src.scenes import BaseScene
+from src.scenes.base.base_scene import BaseScene
+from src.scenes.builtins.scenes_stack import ScenesStack
 
 
 class SceneManagerMixin:
+    scenes_stack = ScenesStack()
+
     def set_scene(self, scene: BaseScene):
         if scene is None:
             self.scene.stop_running()
+
         self.scene = scene
 
     def draw_scene(self, *args, **kwargs):

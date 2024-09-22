@@ -1,10 +1,35 @@
 from pathlib import Path
+from functools import lru_cache
 
 import pygame as pg
 
 from src.core.settings import KEY_BINDINGS
-from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE
+from . import FONT_FILENAME
+from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE, COLORS
 
+
+@lru_cache(maxsize=128)
+def render_text_with_outline(text, font, text_color, **kwargs):
+    outline_color = get_color(kwargs.get('outline_color', (0, 0, 0)))
+    outline_width = kwargs.get('outline_width', 2)
+    shadow_width = kwargs.get('shadow_width', 3)
+
+    text_surface = font.render(text, True, text_color)
+
+    outline_surface = pg.Surface((text_surface.get_width() + 2 * outline_width,
+                                  text_surface.get_height() + 2 * outline_width),
+                                 pg.SRCALPHA)
+
+    # render outline by blitting multiple times
+    for dx in range(-outline_width, outline_width + 1):
+        for dy in range(-outline_width, outline_width * shadow_width + 1):
+            if dx != 0 or dy != 0:  # skip center
+                outline_surface.blit(font.render(text, True, outline_color),
+                                     (dx + outline_width, dy + outline_width))
+
+    outline_surface.blit(text_surface, (outline_width, outline_width))
+
+    return outline_surface
 
 def is_pressed(events, key: str | list[str] = 'any') -> bool:
     try:
@@ -21,10 +46,17 @@ def is_pressed(events, key: str | list[str] = 'any') -> bool:
     return False
 
 
-def get_font(font_name: str = 'Pixeled.ttf',
+def get_font(font_name: str = FONT_FILENAME,
              font_size: int = DEFAULT_FONT_SIZE) -> pg.font.Font:
     return pg.font.Font(FONTS_DIR.joinpath(font_name), font_size)
 
+def get_color(color: str | tuple) -> tuple:
+    if isinstance(color, str):
+        try:
+            return COLORS[color]
+        except KeyError:
+            raise ValueError(f"Color {color} not found in COLORS")
+    return color
 
 def is_between(value: float | int, minimum: int, maximum: int):
     return minimum <= value <= maximum
