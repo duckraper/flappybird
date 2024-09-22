@@ -1,4 +1,4 @@
-from src.scenes.base.base_menu_scene import BaseMenuScene
+from src.scenes.menus.base.base_menu_scene import BaseMenuScene
 
 
 class HighScoresScene(BaseMenuScene):
