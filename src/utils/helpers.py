@@ -3,7 +3,7 @@ from functools import lru_cache
 
 import pygame as pg
 
-from src.core.settings import KEY_BINDINGS
+from src.core.settings import KEY_BINDINGS, SCREEN_WIDTH, INGAME_DEADZONE
 from . import FONT_FILENAME
 from .constants import FONTS_DIR, DEFAULT_FONT_SIZE, ASSETS_DIR, DEFAULT_SPRITE_SIZE, COLORS
 
@@ -61,6 +61,8 @@ def get_color(color: str | tuple) -> tuple:
 def is_between(value: float | int, minimum: int, maximum: int):
     return minimum <= value <= maximum
 
+def placed_out_of_deadzone(*y_positions) -> bool:
+    return not all(is_between(y, INGAME_DEADZONE[0], INGAME_DEADZONE[1]) for y in y_positions)
 
 def load_image(filepath: Path | str) -> pg.surface.Surface:
     return pg.image.load(filepath).convert_alpha()

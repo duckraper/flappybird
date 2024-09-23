@@ -8,6 +8,12 @@ SCREEN_WIDTH: int = 800
 SCREEN_HEIGHT: int = 600
 SCREEN_SIZE: tuple[int, int] = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
+GRAVITY_FORCE = 1000
+JUMP_FORCE = 380
+
+INGAME_DEADZONE = (SCREEN_HEIGHT // 5,
+                   SCREEN_HEIGHT - SCREEN_HEIGHT // 5)
+
 MUSIC_VOLUME = 0.5
 SFX_VOLUME = 0.7
 
@@ -25,8 +31,28 @@ KEY_BINDINGS = {
 }
 
 DIFFICULTY_LEVELS = {
-    'easy': {'speed': 5, 'spawn_rate': 4},
-    'medium': {'speed': 7, 'spawn_rate': 3},
-    'hard': {'speed': 10, 'spawn_rate': 1},
-    'insane': {'speed': 15, 'spawn_rate': 1}
+    'easy': {
+        'speed': 200,
+        'spawn_rate': 1.5,
+        'max_pipes_offset': SCREEN_HEIGHT // 2,
+        'min_pipes_offset': SCREEN_HEIGHT // 4
+    },
+    'medium': {
+        'speed': 300,
+        'spawn_rate': 1.3,
+        'max_pipes_offset': SCREEN_HEIGHT // 4,
+        'min_pipes_offset': SCREEN_HEIGHT // 5
+    },
+    'hard': {
+        'speed': 420,
+        'spawn_rate': 1,
+        'max_pipes_offset': SCREEN_HEIGHT // 5,
+        'min_pipes_offset': SCREEN_HEIGHT // 6
+    },
+    'insane': {
+        'speed': 560,
+        'spawn_rate': 0.9,
+        'max_pipes_offset': SCREEN_HEIGHT // 7,
+        'min_pipes_offset': SCREEN_HEIGHT // 8
+    }
 }

@@ -18,7 +18,7 @@ class Game(EventManagerMixin,
         self.debugger = Debug()
         self.scene = None
 
-        self.difficulty = 'medium'
+        self.difficulty = 'insane'
         self.high_score = 0
 
         self.startup()

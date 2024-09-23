@@ -1,6 +1,8 @@
+from src.core.settings import GRAVITY_FORCE, JUMP_FORCE
+
+
 class Physics:
-    """Physics class to handle gravity and jumping for the bird"""
-    def __init__(self, gravity: float=600, jump_force: float=250):
+    def __init__(self, gravity: float=GRAVITY_FORCE, jump_force: float=JUMP_FORCE):
         self.gravity = gravity
         self.jump_force = jump_force
         self.velocity = 0
