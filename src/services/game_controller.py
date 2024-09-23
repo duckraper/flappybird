@@ -19,10 +19,12 @@ class GameController(SpriteManagerMixin,
         self.max_pipes_offset = self.get_game_prop('max_pipes_offset')
         self.min_pipes_offset = self.get_game_prop('min_pipes_offset')
 
+        floor = self.spawner('floor')
         bird = self.spawner('bird')
+        self.floor = pg.sprite.GroupSingle(floor)
         self.pipes = pg.sprite.Group()
         self.bird = pg.sprite.GroupSingle(bird)
-        self.sprites = pg.sprite.Group([self.bird, self.pipes])
+        self.sprites = pg.sprite.Group([self.floor, self.bird, self.pipes])
 
         self.game_speed = self.get_game_prop('speed')
         self.spawn_rate = self.get_game_prop('spawn_rate')
@@ -40,17 +42,6 @@ class GameController(SpriteManagerMixin,
             if not self.scene.running:
                 self.scene.startup()
             self.bird.sprite.jump()
-
-    def spawn_pipes(self):
-        now = time()
-        if now - self.last_spawn_time > self.spawn_rate:
-            self.last_spawn_time = now
-            pipes = self.spawner('pipe')
-            print(pipes)
-            self.pipes.add(pipes)
-
-            self.sprites.add(pipes)
-            print(self.sprites)
 
     def __get_bird_starting_coords(self):
         x = self.screen.get_width() // 6

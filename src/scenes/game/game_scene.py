@@ -30,12 +30,11 @@ class GameScene(BaseScene):
             self.__pause_game()
 
     def draw(self, *args, **kwargs):
-        super().draw(bg_color='jasmine')
+        super().draw(bg_color='sky_blue')
         self.controller.draw_all_sprites()
 
     def update(self, *args, **kwargs):
         self._get_input()
 
         if self.running:
-            self.controller.spawn_pipes()
             self.controller.update_all_sprites()
