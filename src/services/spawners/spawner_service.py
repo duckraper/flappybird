@@ -19,7 +19,6 @@ class SpawnerService(BirdSpawnerMixin,
         return self.spawn(entity_type)
 
     def spawn(self, entity_type: str) -> Sprite | list[Sprite]:
-        print(entity_type)
         if entity_type == 'bird':
             return self.spawn_bird()
         elif entity_type == 'pipe':

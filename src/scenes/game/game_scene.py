@@ -37,4 +37,4 @@ class GameScene(BaseScene):
         self._get_input()
 
         if self.running:
-            self.controller.update_all_sprites()
+            self.controller.update()

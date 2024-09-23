@@ -35,7 +35,8 @@ class Game(EventManagerMixin,
     def perform_rendering(self):
         self.screen.fill(BASE_COLOR)
         self.draw_scene()
-        self.debugger.draw(info=f'delta: {round(self.get_delta(), 3)}')
+        if self.scene.__class__.__name__ == 'GameScene':
+            self.debugger.draw(info=f'score: {self.scene.controller.score}')
 
         pg.display.flip()
 
