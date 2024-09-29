@@ -2,22 +2,29 @@ from random import choice
 
 import pygame as pg
 
+from src.core.game.settings import SCREEN_HEIGHT
 from src.core.physics import Physics
-from src.utils.constants import COLORS
-from .abstracts.animated_sprite import AnimatedSprite
-from ..core.settings import SCREEN_HEIGHT
-from src.utils.spritesheets.bird import bird_spritesheet, birds_colors
+from src.entities.abstracts.animated_sprite import AnimatedSprite
+from src.entities.spritesheets import bird_spritesheet
 
 
 class Bird(AnimatedSprite):
     def __init__(self, x: int, y: int):
-        spritesheet = bird_spritesheet[choice(birds_colors)]
+        spritesheet = bird_spritesheet[choice(list(bird_spritesheet.keys()))]
 
         super().__init__(x, y, 16, *spritesheet)
 
         self.rect: 'Rect' = self.image.get_rect(center=(self.x, self.y))
         self.mask = pg.mask.from_surface(self.image)
         self.physics = Physics()
+
+    def jump(self):
+        self.set_current_frame(0)
+
+        if not self.get_animating():
+            self.set_animating(True)
+
+        self.physics.jump()
 
     def constraints(self):
         if self.rect.top < 0:
@@ -26,13 +33,6 @@ class Bird(AnimatedSprite):
         if self.rect.bottom > SCREEN_HEIGHT:
             self.y = SCREEN_HEIGHT - self.image.get_height() // 2
             self.rect.bottom = SCREEN_HEIGHT
-
-    def jump(self):
-        self.current_frame = 0
-        if not self.animating:
-            self.animating = True
-
-        self.physics.jump()
 
     def update(self, delta: float):
         super().update(delta)

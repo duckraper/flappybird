@@ -1,4 +1,4 @@
-from src.core.settings import GRAVITY_FORCE, JUMP_FORCE
+from src.core.game.settings import GRAVITY_FORCE, JUMP_FORCE
 
 
 class Physics:

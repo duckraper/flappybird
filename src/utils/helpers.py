@@ -1,7 +1,8 @@
 import pygame as pg
 
-from src.core.settings import KEY_BINDINGS, INGAME_DEADZONE
+from src.core.game.settings import KEY_BINDINGS, INGAME_DEADZONE
 from .constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
+
 
 def is_pressed(events, key: str | list[str] = 'any') -> bool:
     try:
@@ -38,6 +39,3 @@ def get_color(color: str | tuple) -> tuple:
 def is_between(value: float | int, minimum: int, maximum: int):
     return minimum <= value <= maximum
 
-
-def placed_out_of_deadzone(*y_positions) -> bool:
-    return not all(is_between(y, INGAME_DEADZONE[0], INGAME_DEADZONE[1]) for y in y_positions)

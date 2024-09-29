@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class SpawnerInterface(ABC):
+class ISpawner(ABC):
     @abstractmethod
-    def _spawn(self):
+    def spawn(self, entity_type: str):
         pass

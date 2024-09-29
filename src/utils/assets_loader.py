@@ -3,7 +3,7 @@ from typing import Union
 
 import pygame as pg
 
-from src.core.settings import BASE_DIR
+from src.core.game.settings import BASE_DIR
 
 # pg.display.init()
 

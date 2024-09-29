@@ -1,5 +1,5 @@
 from src.scenes.abstracts.base_scene import BaseScene
-from src.scenes.builtins.scenes_stack import ScenesStack
+from src.scenes.utils.scenes_stack import ScenesStack
 
 
 class SceneManagerMixin:

@@ -1,5 +1,5 @@
-from src.core.settings import SCREEN_HEIGHT, SCREEN_WIDTH
-from src.entities import Bird
+from src.core.game.settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from src.entities.sprites import Bird
 
 
 class BirdSpawnerMixin:

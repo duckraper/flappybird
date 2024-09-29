@@ -2,11 +2,11 @@ from time import time
 
 from pygame.sprite import Sprite
 
-from .base import BaseSpawner
-from .mixins import BirdSpawnerMixin, PipeSpawnerMixin, FloorSpawnerMixin
+from src.entities.spawner.base import BaseSpawner
+from src.entities.spawner.mixins import BirdSpawnerMixin, PipeSpawnerMixin, FloorSpawnerMixin
 
 
-class SpawnerService(BirdSpawnerMixin,
+class EntitiySpawner(BirdSpawnerMixin,
                      PipeSpawnerMixin,
                      FloorSpawnerMixin,
                      BaseSpawner):

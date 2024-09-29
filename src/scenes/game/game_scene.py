@@ -14,7 +14,6 @@ class GameScene(BaseScene):
         self.controller = GameController(self)
         self.controller.spawner.spawn_floor()
 
-
     def __pause_game(self):
         self.stop_running()
         self.game.scenes_stack.push(self)
@@ -23,17 +22,18 @@ class GameScene(BaseScene):
     def _get_input(self):
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))
 
-        # game input
         self.controller.get_input(keydown_events)
-        # # quit
-        # if is_pressed(keydown_events, ['q']):
-        #     self.game.stop_running()
-        # pause game
+
         if is_pressed(keydown_events, ['p', 'esc']):
             self.__pause_game()
 
+    def stop_running(self, miliseconds=0):
+        super().stop_running()
+        if miliseconds > 0:
+            pg.time.delay(miliseconds)
+
     def perform_game_over(self):
-        self.stop_running()
+        self.stop_running(500)
         self.game.set_scene(GameOverScene(game=self.game))
 
     def draw(self, *args, **kwargs):

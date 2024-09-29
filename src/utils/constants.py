@@ -1,6 +1,6 @@
 import pygame as pg
 
-from src.core.settings import SCREEN_HEIGHT, BASE_DIR
+from src.core.game.settings import SCREEN_HEIGHT, BASE_DIR
 
 DEFAULT_SPRITE_SIZE: tuple[int, int] = (SCREEN_HEIGHT // 15, SCREEN_HEIGHT // 15)
 

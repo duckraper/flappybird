@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import pygame as pg
 
-from src.core.settings import SCREEN_SIZE, GAME_TITLE
+from src.core.game.settings import SCREEN_SIZE, GAME_TITLE
 
 
 # abstract class

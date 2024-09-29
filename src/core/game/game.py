@@ -1,9 +1,9 @@
 import pygame as pg
 
 from src.core.base import BaseGame
+from src.core.game.settings import FPS
 from src.core.mixins import EventManagerMixin, SceneManagerMixin
 from src.core.mixins.delta_time_manager_mixin import DeltaTimeManagerMixin
-from src.core.settings import FPS
 from src.scenes.menus.main_menu_scene import MainMenuScene
 from src.scenes.menus.pause_menu_scene import PauseMenuScene
 from src.utils import Debug

@@ -1,8 +1,8 @@
 import pygame as pg
 
+from src.core.game.settings import DIFFICULTY_LEVELS
 from src.core.mixins import CollisionDetectionMixin, SpriteManagerMixin, GameLogicMixin
-from src.core.settings import DIFFICULTY_LEVELS
-from src.services.spawners import SpawnerService
+from src.entities.spawner import EntitiySpawner
 from src.utils.helpers import is_pressed
 
 
@@ -19,7 +19,7 @@ class GameController(SpriteManagerMixin,
         self.min_pipes_offset = self.get_game_prop('min_pipes_offset')
 
         spawn_rate = self.get_game_prop('spawn_rate')
-        self.spawner = SpawnerService(self, spawn_rate)
+        self.spawner = EntitiySpawner(self, spawn_rate)
 
         bird = self.spawner('bird')
 
@@ -28,6 +28,7 @@ class GameController(SpriteManagerMixin,
         self.bird = pg.sprite.GroupSingle(bird)
         self.sprites = pg.sprite.Group([self.floor, self.bird, self.pipes])
 
+        self.game_over = False
         self.score = 0
 
     @property
@@ -38,12 +39,14 @@ class GameController(SpriteManagerMixin,
         return DIFFICULTY_LEVELS[self.scene.game.difficulty][prop]
 
     def get_input(self, keysdown):
-        if is_pressed(keysdown, ['space', 'up', 'w']):
-            if not self.scene.running:
-                self.scene.startup()
-            self.bird.sprite.jump()
+        if not self.game_over:
+            if is_pressed(keysdown, ['space', 'up', 'w']):
+                if not self.scene.running:
+                    self.scene.startup()
+                self.bird.sprite.jump()
 
     def perform_game_over(self):
+        pg.time.delay(1000)
         self.scene.perform_game_over()
 
     def spawn_sprites(self):

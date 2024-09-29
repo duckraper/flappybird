@@ -1,8 +1,9 @@
-import pygame as pg
-from pygame._sprite import collide_mask
+import time
 
 
 class GameLogicMixin:
+    waiting_time = 1
+
     def check_score(self):
         if self.pipes.sprites():
             pipe = self.pipes.sprites()[0]
@@ -13,10 +14,16 @@ class GameLogicMixin:
             # todo: hacer sonidito
 
     def handle_collisions(self):
-        if self.collided(self.bird.sprite, self.floor):
-            # self.perform_game_over()
-            print('collided')
+        bird = self.bird.sprite
 
-        if self.collided(self.bird.sprite, self.pipes):
-            # self.perform_game_over()
-            print('collided')
+        if self.collided(bird, self.floor):
+            # todo: dar tiempo de espera luego de la colision para el geimover
+            # TODO: tengo suenio, seguirlo todo alberro eqis
+
+            self.perform_game_over()
+
+        if self.collided(bird, self.pipes):
+            for sprite in self.sprites.sprites():
+                if hasattr(sprite, 'speed'):
+                    sprite.set_moving(False)
+                    self.game_over = True

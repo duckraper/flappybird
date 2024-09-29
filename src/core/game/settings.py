@@ -2,11 +2,12 @@ from pathlib import Path
 
 import pygame as pg
 
-BASE_DIR = Path(__file__).resolve().parent.parent  # src/
+BASE_DIR = Path(__file__).resolve().parent.parent.parent  # src/
 
 FPS = 60
 
 GAME_TITLE = 'FlappyBird'
+GAME_ICON = pg.image.load(BASE_DIR.parent / 'assets' / 'images' / 'sprites' / 'bird' / 'blue' / 'blue-bird-00.png')
 
 SCREEN_WIDTH: int = 800
 SCREEN_HEIGHT: int = 600

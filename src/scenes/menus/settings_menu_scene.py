@@ -1,4 +1,4 @@
-from src.scenes.menus.base.base_menu_scene import BaseMenuScene
+from src.scenes.menus.abstracts.base_menu_scene import BaseMenuScene
 
 
 class SettingsScene(BaseMenuScene):
