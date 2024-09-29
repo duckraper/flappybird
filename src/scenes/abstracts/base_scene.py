@@ -1,12 +1,12 @@
 from abc import ABC
+
 from src.scenes.interfaces import SceneInterface
-from src.utils import BASE_COLOR
+from src.utils.constants import BASE_COLOR
 from src.utils.helpers import get_color
 
 
 class BaseScene(SceneInterface, ABC):
     def __init__(self, game: 'Game'):
-
         self.running = False
         self.game = game
 

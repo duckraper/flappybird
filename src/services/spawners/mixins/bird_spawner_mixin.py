@@ -1,7 +1,4 @@
-from pygame.sprite import Sprite
-
 from src.core.settings import SCREEN_HEIGHT, SCREEN_WIDTH
-from src.services.spawners.interfaces import SpawnerInterface
 from src.entities import Bird
 
 

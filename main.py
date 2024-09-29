@@ -8,7 +8,7 @@ from src.core.game import Game
 def main():
     pg.init()
 
-    game = Game()
+    game = Game(title='LeduanMuebles')
     game.run()
 
     sys.exit(0)

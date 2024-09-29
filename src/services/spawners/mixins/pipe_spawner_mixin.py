@@ -1,12 +1,26 @@
 import random as r
+from time import time
 
+from src.core.settings import SCREEN_WIDTH, INGAME_DEADZONE
 from src.entities.pipe import Pipe
-from src.core.settings import SCREEN_WIDTH, SCREEN_HEIGHT, INGAME_DEADZONE
-from src.utils.helpers import is_between, placed_out_of_deadzone
+from src.utils.helpers import placed_out_of_deadzone
 
 
 class PipeSpawnerMixin:
     def spawn_pipe(self):
+        now = time()
+        if now - self.last_spawn_time > self.spawn_rate:
+            pipes = self.create_pipes()
+
+            if pipes:
+                self.controller.pipes.add(pipes)
+                self.controller.sprites.add(pipes)
+
+                self.last_spawn_time = now
+
+            return pipes
+
+    def create_pipes(self):
         x, y = self._get_central_coords()
         offset = self.pipes_offset
 
@@ -16,8 +30,10 @@ class PipeSpawnerMixin:
         if placed_out_of_deadzone(y_upside_down, y_normal):
             return self.spawn_pipe()
 
-        upper_pipe = Pipe(x, y_upside_down, upside_down=True)
-        bottom_pipe = Pipe(x, y_normal, upside_down=False)
+        pipe_color = r.choice(['orange', 'green'])
+        speed = self.controller.game_speed
+        upper_pipe = Pipe(x, y_upside_down, pipe_color, upside_down=True, speed=speed)
+        bottom_pipe = Pipe(x, y_normal, pipe_color, upside_down=False, speed=speed)
 
         return [upper_pipe, bottom_pipe]
 

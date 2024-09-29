@@ -1,10 +1,10 @@
+from src.core.base.base_text_renderer import BaseTextRenderer
 from src.utils.constants import DEFAULT_TITLE_FONT_SIZE, DEFAULT_TITLE_FONT_COLOR, DEFAULT_OPTION_FONT_COLOR, \
     DEFAULT_OPTION_FONT_SIZE, DEFAULT_HOVER_OPTION_FONT_COLOR, DEFAULT_HOVER_OPTION_FONT_SIZE, \
     DEFAULT_OPTIONS_OFFSET, DEFAULT_OUTLINE_WIDTH, DEFAULT_SHADOW_WIDTH, DEFAULT_OUTLINE_COLOR
-from src.utils.helpers import get_font, render_text_with_outline
 
 
-class MenuRenderMixin:
+class MenuRenderMixin(BaseTextRenderer):
     @property
     def selected_option_name(self) -> str:
         return self.menu_option(self.selected_option).name
@@ -53,28 +53,23 @@ class MenuRenderMixin:
 
     def _draw_title(self, screen, screen_width, screen_height, font_size, font_color, outline_width, shadow_width,
                     outline_color):
-        title_surface = self._create_font_surface(self.menu_title, font_size, font_color, outline_width, shadow_width,
-                                                  outline_color)
-        title_rect = title_surface.get_rect(center=(screen_width // 2, screen_height // 4))
-        screen.blit(title_surface, title_rect)
+        self.render(screen, (screen_width // 2, screen_height // 4), self.menu_title, font_size=font_size,
+                    font_color=font_color, outline_width=outline_width, shadow_width=shadow_width,
+                    outline_color=outline_color)
 
     def _draw_options(self, screen, screen_width, screen_height, font_color, font_size, hover_font_color,
                       hover_font_size, options_offset, outline_width, shadow_width, outline_color):
         for option_index in self.menu_option:
             option_color, option_font_size = (
-            hover_font_color, hover_font_size) if option_index == self.selected_option else (font_color, font_size)
-            option_text = self._create_font_surface(option_index.name, option_font_size, option_color, outline_width,
-                                                    shadow_width, outline_color)
+                hover_font_color, hover_font_size) \
+                if option_index == self.selected_option \
+                else (font_color, font_size)
+
             x = screen_width // 2
             y = screen_height // 2.5 + option_index.value * options_offset
-            option_rect = option_text.get_rect(center=(x, y))
-            screen.blit(option_text, option_rect)
 
-    @staticmethod
-    def _create_font_surface(text, font_size, color, outline_width, shadow_width, outline_color):
-        font = get_font(font_size=font_size)
-        return render_text_with_outline(text, font, color, outline_width=outline_width, shadow_width=shadow_width,
-                                        outline_color=outline_color)
+            self.render(screen, (x, y), option_index.name, font_size=option_font_size, font_color=option_color,
+                        outline_width=outline_width, shadow_width=shadow_width, outline_color=outline_color)
 
     def update_selected_option(self, direction):
         self.selected_option = (((self.selected_option + direction - 1) % len(self.menu_option)) + 1)

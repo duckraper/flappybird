@@ -1,4 +1,4 @@
-from src.scenes.base.base_scene import BaseScene
+from src.scenes.abstracts.base_scene import BaseScene
 from src.scenes.builtins.scenes_stack import ScenesStack
 
 

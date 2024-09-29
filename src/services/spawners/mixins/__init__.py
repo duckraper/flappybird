@@ -1,3 +1,3 @@
 from .bird_spawner_mixin import BirdSpawnerMixin
-from .pipe_spawner_mixin import PipeSpawnerMixin
 from .floor_spawner_mixin import FloorSpawnerMixin
+from .pipe_spawner_mixin import PipeSpawnerMixin

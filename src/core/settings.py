@@ -1,4 +1,8 @@
+from pathlib import Path
+
 import pygame as pg
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # src/
 
 FPS = 60
 
@@ -11,7 +15,11 @@ SCREEN_SIZE: tuple[int, int] = (SCREEN_WIDTH, SCREEN_HEIGHT)
 GRAVITY_FORCE = 1000
 JUMP_FORCE = 380
 
-FLOOR_HEIGHT = SCREEN_HEIGHT // 10
+BIRD_SIZE = (SCREEN_HEIGHT // 15, SCREEN_HEIGHT // 15)
+PIPES_SIZE = (SCREEN_WIDTH // 9, SCREEN_HEIGHT)
+FLOOR_SIZE = (SCREEN_WIDTH // 5, SCREEN_HEIGHT // 14)
+FLOOR_WIDTH, FLOOR_HEIGHT = FLOOR_SIZE
+
 FLOOR_Y = SCREEN_HEIGHT - FLOOR_HEIGHT
 
 INGAME_DEADZONE = (SCREEN_HEIGHT // 5,
@@ -59,3 +67,4 @@ DIFFICULTY_LEVELS = {
         'min_pipes_offset': SCREEN_HEIGHT // 8
     }
 }
+

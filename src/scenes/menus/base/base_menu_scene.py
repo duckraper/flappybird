@@ -3,9 +3,9 @@ from enum import IntEnum
 
 import pygame as pg
 
+from src.scenes.abstracts.base_scene import BaseScene
 from src.scenes.menus.mixins import MenuActionHandlerMixin, MenuRenderMixin
 from src.utils.helpers import is_pressed
-from src.scenes.base.base_scene import BaseScene
 
 UP, DOWN = (-1, 1)
 

@@ -1,3 +1,1 @@
-from .collision_detection_mixin import CollisionDetectionMixin
-from .sprite_manager_mixin import SpriteManagerMixin
-from .game_logic_mixin import GameLogicMixin
+

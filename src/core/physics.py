@@ -2,7 +2,7 @@ from src.core.settings import GRAVITY_FORCE, JUMP_FORCE
 
 
 class Physics:
-    def __init__(self, gravity: float=GRAVITY_FORCE, jump_force: float=JUMP_FORCE):
+    def __init__(self, gravity: float = GRAVITY_FORCE, jump_force: float = JUMP_FORCE):
         self.gravity = gravity
         self.jump_force = jump_force
         self.velocity = 0

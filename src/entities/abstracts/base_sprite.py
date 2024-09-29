@@ -1,5 +1,6 @@
-from pygame.sprite import Sprite
 from abc import ABC, abstractmethod
+
+from pygame.sprite import Sprite
 
 
 class BaseSprite(Sprite,
@@ -9,6 +10,10 @@ class BaseSprite(Sprite,
         self.image: 'Surface' = image
         self.x = x
         self.y = y
+
+    @abstractmethod
+    def constraints(self):
+        pass
 
     @abstractmethod
     def update(self, delta):

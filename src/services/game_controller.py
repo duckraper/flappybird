@@ -1,12 +1,9 @@
-from time import time
-
 import pygame as pg
 
+from src.core.mixins import CollisionDetectionMixin, SpriteManagerMixin, GameLogicMixin
 from src.core.settings import DIFFICULTY_LEVELS
-from src.entities.bird import Bird
 from src.services.spawners import SpawnerService
 from src.utils.helpers import is_pressed
-from src.mixins import CollisionDetectionMixin, SpriteManagerMixin, GameLogicMixin
 
 
 class GameController(SpriteManagerMixin,
@@ -15,25 +12,23 @@ class GameController(SpriteManagerMixin,
     def __init__(self, scene: 'BaseScene'):
         self.scene = scene
 
-        self.spawner = SpawnerService(self)
-
         self.game_speed = self.get_game_prop('speed')
         self.spawn_rate = self.get_game_prop('spawn_rate')
 
         self.max_pipes_offset = self.get_game_prop('max_pipes_offset')
         self.min_pipes_offset = self.get_game_prop('min_pipes_offset')
 
-        floor = self.spawner('floor')
+        spawn_rate = self.get_game_prop('spawn_rate')
+        self.spawner = SpawnerService(self, spawn_rate)
+
         bird = self.spawner('bird')
 
         self.pipes = pg.sprite.Group()
-        self.floor = pg.sprite.GroupSingle(floor)
+        self.floor = pg.sprite.Group()
         self.bird = pg.sprite.GroupSingle(bird)
         self.sprites = pg.sprite.Group([self.floor, self.bird, self.pipes])
 
         self.score = 0
-
-        self.last_spawn_time = time()
 
     @property
     def screen(self):
@@ -48,9 +43,17 @@ class GameController(SpriteManagerMixin,
                 self.scene.startup()
             self.bird.sprite.jump()
 
+    def perform_game_over(self):
+        self.scene.perform_game_over()
+
+    def spawn_sprites(self):
+        self.spawner('floor')
+        self.spawner('pipe')
+
     def update(self):
+        self.spawn_sprites()
         self.update_all_sprites()
-        self.check_collisions()
+        self.handle_collisions()
         self.check_score()
 
     def __get_bird_starting_coords(self):

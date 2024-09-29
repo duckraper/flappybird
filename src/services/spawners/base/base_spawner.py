@@ -1,6 +1,5 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
-from ..interfaces import SpawnerInterface
 
 class BaseSpawner(ABC):
     def __init__(self, controller: 'GameController'):

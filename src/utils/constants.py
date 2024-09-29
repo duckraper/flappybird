@@ -1,14 +1,8 @@
-from pathlib import Path
-
 import pygame as pg
 
-from src.core.settings import SCREEN_HEIGHT
-
-BASE_DIR = Path(__file__).resolve().parent.parent  # src/
-ASSETS_DIR = BASE_DIR.joinpath('assets')  # src/assets
+from src.core.settings import SCREEN_HEIGHT, BASE_DIR
 
 DEFAULT_SPRITE_SIZE: tuple[int, int] = (SCREEN_HEIGHT // 15, SCREEN_HEIGHT // 15)
-
 
 FONTS_DIR = BASE_DIR.parent.joinpath('assets', 'fonts')  # ../assets/fonts
 
