@@ -7,24 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent  # src/
 FPS = 60
 
 GAME_TITLE = 'FlappyBird'
-GAME_ICON = pg.image.load(BASE_DIR.parent / 'assets' / 'images' / 'sprites' / 'bird' / 'blue' / 'blue-bird-00.png')
+GAME_ICON = pg.image.load(BASE_DIR.parent / 'assets' / 'img.ico')
 
 SCREEN_WIDTH: int = 800
 SCREEN_HEIGHT: int = 600
 SCREEN_SIZE: tuple[int, int] = (SCREEN_WIDTH, SCREEN_HEIGHT)
-
-GRAVITY_FORCE = 1000
-JUMP_FORCE = 380
-
-BIRD_SIZE = (SCREEN_HEIGHT // 15, SCREEN_HEIGHT // 15)
-PIPES_SIZE = (SCREEN_WIDTH // 9, SCREEN_HEIGHT)
-FLOOR_SIZE = (SCREEN_WIDTH // 5, SCREEN_HEIGHT // 14)
-FLOOR_WIDTH, FLOOR_HEIGHT = FLOOR_SIZE
-
-FLOOR_Y = SCREEN_HEIGHT - FLOOR_HEIGHT
-
-INGAME_DEADZONE = (SCREEN_HEIGHT // 5,
-                   FLOOR_Y - SCREEN_HEIGHT // 5)
 
 MUSIC_VOLUME = 0.5
 SFX_VOLUME = 0.7
@@ -43,29 +30,46 @@ KEY_BINDINGS = {
 }
 
 DIFFICULTY_LEVELS = {
+    'chill': {
+        'speed': SCREEN_WIDTH // 8,
+        'spawn_rate': 2,
+        'max_pipes_offset': SCREEN_HEIGHT // 1.5,
+        'min_pipes_offset': SCREEN_HEIGHT // 3,
+        'description': "This is the easiest difficulty, perfect for beginners. "
+                       "The game will be slow and the pipes will be far apart."
+    },
     'easy': {
-        'speed': 200,
+        'speed': SCREEN_WIDTH // 4,
         'spawn_rate': 1.5,
         'max_pipes_offset': SCREEN_HEIGHT // 2,
-        'min_pipes_offset': SCREEN_HEIGHT // 4
+        'min_pipes_offset': SCREEN_HEIGHT // 4,
+        'description': "This is a beginner-friendly difficulty. "
+                       "The game will be a bit faster and the pipes will be closer."
     },
     'medium': {
-        'speed': 300,
+        'speed': SCREEN_WIDTH // 2.6,
         'spawn_rate': 1.3,
         'max_pipes_offset': SCREEN_HEIGHT // 4,
-        'min_pipes_offset': SCREEN_HEIGHT // 5
+        'min_pipes_offset': SCREEN_HEIGHT // 5,
+        'description': "This is the default difficulty. "
+                       "The game will be fast and the pipes will be very close."
     },
     'hard': {
-        'speed': 420,
+        'speed': SCREEN_WIDTH // 1.9,
         'spawn_rate': 1,
         'max_pipes_offset': SCREEN_HEIGHT // 5,
-        'min_pipes_offset': SCREEN_HEIGHT // 6
+        'min_pipes_offset': SCREEN_HEIGHT // 6,
+        'description': "This is a challenging difficulty. "
+                       "The game will be very fast and the pipes will be extremely close."
     },
     'insane': {
-        'speed': 560,
+        'speed': SCREEN_WIDTH // 1.5,
         'spawn_rate': 0.9,
         'max_pipes_offset': SCREEN_HEIGHT // 7,
-        'min_pipes_offset': SCREEN_HEIGHT // 8
-    }
+        'min_pipes_offset': SCREEN_HEIGHT // 8,
+        'description': "This is the hardest difficulty. "
+                       "The game will be extremely fast and the pipes will be very close."
+    },
+
 }
 

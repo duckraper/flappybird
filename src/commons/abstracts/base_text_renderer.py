@@ -3,7 +3,7 @@ from functools import lru_cache
 
 import pygame as pg
 
-from src.utils.helpers import get_font, get_color
+from src.commons.helpers import get_font, get_color
 
 
 class BaseTextRenderer(ABC):

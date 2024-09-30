@@ -1,13 +1,13 @@
 import pygame as pg
 
-from src.core.base import BaseGame
+from src.commons import Debug
+from src.commons.constants import BASE_COLOR
+from src.core.abstracts import BaseGame
 from src.core.game.settings import FPS
 from src.core.mixins import EventManagerMixin, SceneManagerMixin
 from src.core.mixins.delta_time_manager_mixin import DeltaTimeManagerMixin
 from src.scenes.menus.main_menu_scene import MainMenuScene
 from src.scenes.menus.pause_menu_scene import PauseMenuScene
-from src.utils import Debug
-from src.utils.constants import BASE_COLOR
 
 
 class Game(EventManagerMixin,
@@ -35,9 +35,9 @@ class Game(EventManagerMixin,
     def perform_rendering(self):
         self.screen.fill(BASE_COLOR)
         self.draw_scene()
-        # if self.scene.__class__.__name__ == 'GameScene':
-        #     self.debugger.draw(info=f'score: {self.scene.controller.score}')
-        self.debugger.draw(info=f'{self.clock.get_fps()} FPS')
+        if self.scene.__class__.__name__ == 'GameScene':
+            self.debugger.draw(info=f'score: {self.scene.manager.score}')
+        # self.debugger.draw(info=f'{self.clock.get_fps()} FPS')
         # self.debugger.draw(info=self.clock.get_fps())
         pg.display.flip()
 

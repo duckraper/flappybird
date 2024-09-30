@@ -2,16 +2,17 @@ from random import choice
 
 import pygame as pg
 
+from src.commons.audio_player import AudioPlayer
 from src.core.game.settings import SCREEN_HEIGHT
 from src.core.physics import Physics
 from src.entities.abstracts.animated_sprite import AnimatedSprite
-from src.entities.spritesheets import bird_spritesheet
+from src.resources.sounds import sfx
+from src.resources.spritesheets import bird_spritesheet
 
 
 class Bird(AnimatedSprite):
     def __init__(self, x: int, y: int):
         spritesheet = bird_spritesheet[choice(list(bird_spritesheet.keys()))]
-
         super().__init__(x, y, 16, *spritesheet)
 
         self.rect: 'Rect' = self.image.get_rect(center=(self.x, self.y))
@@ -20,6 +21,7 @@ class Bird(AnimatedSprite):
 
     def jump(self):
         self.set_current_frame(0)
+        AudioPlayer.play_sound(sfx.get('flap'))
 
         if not self.get_animating():
             self.set_animating(True)

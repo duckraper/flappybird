@@ -5,8 +5,6 @@ import pygame as pg
 
 from src.core.game.settings import BASE_DIR
 
-# pg.display.init()
-
 ASSETS_DIR = BASE_DIR.parent.joinpath('assets')  # src/assets
 SPRITES_DIR = ASSETS_DIR.joinpath('images', 'sprites')
 
@@ -15,7 +13,7 @@ class AssetsLoader:
     @staticmethod
     def load_image(filepath: Path | str) -> 'Surface':
         if not pg.display.get_init():
-            pg.display.set_mode((1, 1))  # Set a minimal video mode
+            pg.display.set_mode((1, 1))
         return pg.image.load(filepath).convert_alpha()
 
     @staticmethod
@@ -24,7 +22,7 @@ class AssetsLoader:
                      size: tuple[int, int],
                      colorkey=None) -> Union[list['Surface'], 'Surface']:
         """
-         Usage:
+         usage:
             sprite = load_sprites("path/to/spritesheet", "sprite_name-0{i}.png", (50, 50), (0, 0, 0))
             where n is the number of the sprite frame
         """
@@ -44,3 +42,17 @@ class AssetsLoader:
         return sprite_list \
             if len(sprite_list) > 1 \
             else sprite_list[0]
+
+    @staticmethod
+    def load_music(filepath: Path | str) -> None:
+        if not pg.mixer.get_init():
+            pg.mixer.init()
+        pg.mixer.music.load(filepath)
+
+    @staticmethod
+    def load_sound(filepath: Path | str, volume: float=1.0) -> 'Sound':
+        if not pg.mixer.get_init():
+            pg.mixer.init()
+        sound = pg.mixer.Sound(filepath)
+        sound.set_volume(volume)
+        return sound

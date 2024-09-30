@@ -13,7 +13,7 @@ class MainMenuScene(BaseMenuScene):
         super().__init__(game, game.title, *options_list)
 
     def draw(self, *args, **kwargs):
-        super().draw(title_font_size=180)
+        super().draw(title_font_size=200)
 
     def perform_start(self):
         self.game.set_scene(GameScene(game=self.game))

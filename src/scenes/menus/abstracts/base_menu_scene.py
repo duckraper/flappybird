@@ -3,9 +3,9 @@ from enum import IntEnum
 
 import pygame as pg
 
+from src.commons.helpers import is_pressed
 from src.scenes.abstracts.base_scene import BaseScene
 from src.scenes.menus.mixins import MenuActionHandlerMixin, MenuRenderMixin
-from src.utils.helpers import is_pressed
 
 UP, DOWN = (-1, 1)
 
@@ -38,6 +38,6 @@ class BaseMenuScene(BaseScene,
             self.update_selected_option(UP)
         elif is_pressed(keydown_events, 'down'):
             self.update_selected_option(DOWN)
-        elif is_pressed(keydown_events, 'enter'):
+        elif is_pressed(keydown_events, ['enter', 'space']):
             # calls the function f'perform_{action}'
             self.call_method(self.selected_option_name)

@@ -1,4 +1,4 @@
-import time
+from src.commons.audio_player import AudioPlayer
 
 
 class GameLogicMixin:
@@ -9,6 +9,7 @@ class GameLogicMixin:
             pipe = self.pipes.sprites()[0]
             if not hasattr(pipe, 'scored') or not pipe.scored:
                 if self.bird.sprite.rect.left > pipe.rect.right:
+                    AudioPlayer.play_sound()
                     self.score += 1
                     pipe.scored = True
             # todo: hacer sonidito
@@ -17,9 +18,6 @@ class GameLogicMixin:
         bird = self.bird.sprite
 
         if self.collided(bird, self.floor):
-            # todo: dar tiempo de espera luego de la colision para el geimover
-            # TODO: tengo suenio, seguirlo todo alberro eqis
-
             self.perform_game_over()
 
         if self.collided(bird, self.pipes):

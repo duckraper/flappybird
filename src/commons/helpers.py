@@ -1,6 +1,6 @@
 import pygame as pg
 
-from src.core.game.settings import KEY_BINDINGS, INGAME_DEADZONE
+from src.core.game.settings import KEY_BINDINGS
 from .constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
 
 

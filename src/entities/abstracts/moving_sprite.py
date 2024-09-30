@@ -1,6 +1,6 @@
-from .base_sprite import BaseSprite
 from abc import ABC
 
+from .base_sprite import BaseSprite
 from ..interfaces import IMovingSprite
 
 

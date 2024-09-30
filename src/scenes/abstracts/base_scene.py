@@ -1,8 +1,8 @@
 from abc import ABC
 
+from src.commons.constants import BASE_COLOR
+from src.commons.helpers import get_color
 from src.scenes.interfaces import IScene
-from src.utils.constants import BASE_COLOR
-from src.utils.helpers import get_color
 
 
 class BaseScene(IScene, ABC):

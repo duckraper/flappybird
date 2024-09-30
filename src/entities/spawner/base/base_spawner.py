@@ -4,5 +4,5 @@ from src.entities.spawner.interfaces import ISpawner
 
 
 class BaseSpawner(ISpawner, ABC):
-    def __init__(self, controller: 'GameController'):
-        self.controller = controller
+    def __init__(self, manager: 'GameFlowManager'):
+        self.manager = manager

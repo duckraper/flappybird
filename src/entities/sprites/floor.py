@@ -2,9 +2,10 @@ from random import choice
 
 import pygame as pg
 
-from src.core.game.settings import FLOOR_Y, DIFFICULTY_LEVELS
+from src.commons.constants import FLOOR_Y
+from src.core.game.settings import DIFFICULTY_LEVELS
 from src.entities.abstracts.moving_sprite import MovingSprite
-from src.entities.spritesheets import floor_spritesheet
+from src.resources.spritesheets import floor_spritesheet
 
 
 class Floor(MovingSprite):

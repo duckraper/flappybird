@@ -1,5 +1,7 @@
 from abc import ABC
 
+import pygame as pg
+
 from src.entities import BaseSprite
 from src.entities.interfaces import IAnimatedSprite
 
@@ -35,6 +37,7 @@ class AnimatedSprite(BaseSprite,
                 self.set_current_frame(0)
                 self.set_animating(False)
             self.image = self.spritesheet[self.get_current_frame()]
+            self.mask = pg.mask.from_surface(self.image)
 
     def update(self, delta):
         self.animate(delta)

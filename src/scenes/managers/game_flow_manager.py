@@ -1,14 +1,14 @@
 import pygame as pg
 
+from src.commons.helpers import is_pressed
 from src.core.game.settings import DIFFICULTY_LEVELS
-from src.core.mixins import CollisionDetectionMixin, SpriteManagerMixin, GameLogicMixin
+from src.core.mixins import SpriteManagerMixin, CollisionDetectionMixin, GameLogicMixin
 from src.entities.spawner import EntitiySpawner
-from src.utils.helpers import is_pressed
 
 
-class GameController(SpriteManagerMixin,
-                     CollisionDetectionMixin,
-                     GameLogicMixin):
+class GameFlowManager(SpriteManagerMixin,
+                      CollisionDetectionMixin,
+                      GameLogicMixin):
     def __init__(self, scene: 'BaseScene'):
         self.scene = scene
 
@@ -46,12 +46,12 @@ class GameController(SpriteManagerMixin,
                 self.bird.sprite.jump()
 
     def perform_game_over(self):
-        pg.time.delay(1000)
         self.scene.perform_game_over()
 
     def spawn_sprites(self):
-        self.spawner('floor')
-        self.spawner('pipe')
+        if not self.game_over:
+            self.spawner('floor')
+            self.spawner('pipe')
 
     def update(self):
         self.spawn_sprites()
