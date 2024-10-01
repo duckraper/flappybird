@@ -1,3 +1,7 @@
+from src.commons.audio_player import AudioPlayer
+from src.commons.constants import SWOOSH_VOLUME
+
+
 class MenuActionHandlerMixin:
     def call_method(self, action: str) -> None:
         action_name = action.lower().replace(' ', '_')
@@ -7,5 +11,6 @@ class MenuActionHandlerMixin:
 
         if callable(method):
             method()
+            AudioPlayer.play_sound('swoosh', SWOOSH_VOLUME)
         else:
             raise AttributeError(f"Method {method_name} not found")

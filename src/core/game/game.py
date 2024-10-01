@@ -3,7 +3,7 @@ import pygame as pg
 from src.commons import Debug
 from src.commons.constants import BASE_COLOR
 from src.core.abstracts import BaseGame
-from src.core.game.settings import FPS
+from src.core.game.settings import FPS, DIFFICULTY_LEVELS
 from src.core.mixins import EventManagerMixin, SceneManagerMixin
 from src.core.mixins.delta_time_manager_mixin import DeltaTimeManagerMixin
 from src.scenes.menus.main_menu_scene import MainMenuScene
@@ -28,6 +28,12 @@ class Game(EventManagerMixin,
 
         self.set_scene(MainMenuScene(game=self))
 
+    def set_difficulty(self, difficulty: str):
+        if difficulty not in list(DIFFICULTY_LEVELS.keys()):
+            raise ValueError(f'Difficulty level {difficulty} not allowed')
+
+        self.difficulty = difficulty
+
     @property
     def is_paused(self) -> bool:
         return isinstance(self.scene, PauseMenuScene)
@@ -37,13 +43,12 @@ class Game(EventManagerMixin,
         self.draw_scene()
         if self.scene.__class__.__name__ == 'GameScene':
             self.debugger.draw(info=f'score: {self.scene.manager.score}')
-        # self.debugger.draw(info=f'{self.clock.get_fps()} FPS')
-        # self.debugger.draw(info=self.clock.get_fps())
+
         pg.display.flip()
 
     def update(self):
         self.process_events_but_input()
-        self.update_scene()
+        self.update_scene(delta=self.get_delta())
 
         self.update_delta()
 

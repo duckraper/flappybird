@@ -4,20 +4,20 @@ import pygame as pg
 
 from src.commons.constants import FLOOR_Y
 from src.core.game.settings import DIFFICULTY_LEVELS
+from src.entities.abstracts import SolidSprite, CollidableSprite, CommonSprite
 from src.entities.abstracts.moving_sprite import MovingSprite
 from src.resources.spritesheets import floor_spritesheet
 
 
-class Floor(MovingSprite):
+class Floor(SolidSprite,
+            MovingSprite,
+            CollidableSprite,
+            CommonSprite):
     def __init__(self, x=0, y=FLOOR_Y, speed=DIFFICULTY_LEVELS['medium']['speed']):
-        self.speed = speed
+        image = floor_spritesheet[choice(list(floor_spritesheet.keys()))]
 
-        kind_choice = choice(list(floor_spritesheet.keys()))
-        image = floor_spritesheet[kind_choice]
-        super().__init__(speed, image, x, y)
-
-        self.rect = self.image.get_rect(topleft=(self.x, self.y))
-        self.mask = pg.mask.from_surface(self.image)
+        MovingSprite.__init__(self, vx=speed)
+        CommonSprite.__init__(self, image, x, y, topleft=(x, y))
 
     def constraints(self):
         if self.rect.right < 0:
@@ -25,5 +25,6 @@ class Floor(MovingSprite):
 
     def update(self, delta):
         super().update(delta)
+        self.move_x(delta)
 
         self.constraints()

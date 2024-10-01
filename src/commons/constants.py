@@ -8,8 +8,8 @@ FONTS_DIR = BASE_DIR.parent.joinpath('assets', 'fonts')  # ../assets/fonts
 
 pg.font.init()
 
-GRAVITY_FORCE = int(SCREEN_HEIGHT * 1.8333)
-JUMP_FORCE = int(SCREEN_HEIGHT * 0.5667)
+GRAVITY_FORCE = SCREEN_HEIGHT * 0.98
+JUMP_FORCE = SCREEN_HEIGHT * 0.3
 
 FONT_FILENAME = 'FlappyBirdRegular-9Pq0.ttf'
 DEFAULT_FONT_SIZE = 20
@@ -52,3 +52,10 @@ FLOOR_Y = SCREEN_HEIGHT - FLOOR_HEIGHT
 
 INGAME_DEADZONE = (SCREEN_HEIGHT // 5,
                    FLOOR_Y - SCREEN_HEIGHT // 5)
+
+# base sfx volumes
+SCORE_VOLUME = 0.8
+DIE_VOLUME = 0.8
+HIT_VOLUME = 0.8
+SWOOSH_VOLUME = 0.6
+FLAP_VOLUME = 0.4

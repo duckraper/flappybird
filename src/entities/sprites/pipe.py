@@ -1,26 +1,24 @@
 from time import time
 
-import pygame as pg
-
 from src.core.game.settings import DIFFICULTY_LEVELS
-from src.entities.abstracts.moving_sprite import MovingSprite
+from src.entities.abstracts import CommonSprite, CollidableSprite, MovingSprite, SolidSprite
 from src.resources.spritesheets import pipe_spritesheet
 
 
-class Pipe(MovingSprite):
+class Pipe(SolidSprite,
+           MovingSprite,
+           CollidableSprite,
+           CommonSprite):
     def __init__(self, x, y, color, upside_down: bool = False, speed=DIFFICULTY_LEVELS['medium']['speed']):
-        self.speed = speed
-
         image = pipe_spritesheet[color]
 
-        super().__init__(speed, image, x, y)
+        MovingSprite.__init__(self, vx=speed)
 
         if upside_down:
-            self.rect: 'Rect' = self.image.get_rect(midbottom=(self.x, self.y))
+            CommonSprite.__init__(self, image, x, y, midbottom=(x, y))
         else:
-            self.rect: 'Rect' = self.image.get_rect(midtop=(self.x, self.y))
+            CommonSprite.__init__(self, image, x, y, midtop=(x, y))
 
-        self.mask = pg.mask.from_surface(self.image)
         self.spawn_time = time()
 
     def constraints(self):
@@ -28,6 +26,6 @@ class Pipe(MovingSprite):
             self.kill()
 
     def update(self, delta):
-        super().update(delta)
+        self.move_x(delta)
 
         self.constraints()

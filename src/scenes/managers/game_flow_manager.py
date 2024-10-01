@@ -1,8 +1,10 @@
 import pygame as pg
 
+from src.commons.audio_player import AudioPlayer
 from src.commons.helpers import is_pressed
 from src.core.game.settings import DIFFICULTY_LEVELS
 from src.core.mixins import SpriteManagerMixin, CollisionDetectionMixin, GameLogicMixin
+from src.core.physics import Physics
 from src.entities.spawner import EntitiySpawner
 
 
@@ -11,6 +13,7 @@ class GameFlowManager(SpriteManagerMixin,
                       GameLogicMixin):
     def __init__(self, scene: 'BaseScene'):
         self.scene = scene
+        self.physics = Physics()
 
         self.game_speed = self.get_game_prop('speed')
         self.spawn_rate = self.get_game_prop('spawn_rate')
@@ -31,6 +34,8 @@ class GameFlowManager(SpriteManagerMixin,
         self.game_over = False
         self.score = 0
 
+        self.spawner.spawn_floor()
+
     @property
     def screen(self):
         return self.scene.game.screen
@@ -42,10 +47,15 @@ class GameFlowManager(SpriteManagerMixin,
         if not self.game_over:
             if is_pressed(keysdown, ['space', 'up', 'w']):
                 if not self.scene.running:
-                    self.scene.startup()
-                self.bird.sprite.jump()
+                    self.start_game()
+                self.bird.sprite.jump(self.scene.game.get_delta())
+
+    def start_game(self):
+        self.scene.startup()
 
     def perform_game_over(self):
+        # todo: arreglar los sonidos de todo el juego
+        AudioPlayer.play_sound('die')
         self.scene.perform_game_over()
 
     def spawn_sprites(self):
@@ -53,9 +63,10 @@ class GameFlowManager(SpriteManagerMixin,
             self.spawner('floor')
             self.spawner('pipe')
 
-    def update(self):
+    def update(self, delta):
         self.spawn_sprites()
         self.update_all_sprites()
+        self.physics.apply_gravity(self.sprites, delta)
         self.handle_collisions()
         self.check_score()
 

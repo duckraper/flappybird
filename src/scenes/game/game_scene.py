@@ -12,12 +12,6 @@ class GameScene(BaseScene):
         super().__init__(game)
 
         self.manager = GameFlowManager(self)
-        self.manager.spawner.spawn_floor()
-
-    def __pause_game(self):
-        self.stop_running()
-        self.game.scenes_stack.push(self)
-        self.game.set_scene(PauseMenuScene(game=self.game))
 
     def _get_input(self):
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))
@@ -25,7 +19,12 @@ class GameScene(BaseScene):
         self.manager.get_input(keydown_events)
 
         if is_pressed(keydown_events, ['p', 'esc']):
-            self.__pause_game()
+            self.pause_game()
+
+    def pause_game(self):
+        self.stop_running()
+        self.game.scenes_stack.push(self)
+        self.game.set_scene(PauseMenuScene(game=self.game))
 
     def stop_running(self, miliseconds=0):
         super().stop_running()
@@ -44,4 +43,4 @@ class GameScene(BaseScene):
         self._get_input()
 
         if self.running:
-            self.manager.update()
+            self.manager.update(kwargs.get('delta'))

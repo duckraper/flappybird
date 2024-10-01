@@ -8,9 +8,12 @@ from src.entities.interfaces import ISprite
 class BaseSprite(Sprite,
                  ISprite,
                  ABC):
-    def __init__(self, image: 'Surface', x: int, y: int):
+    """
+    base class thatt provides a simple interface for most sprite_group
+    like getting and setting position and updating constraints
+    """
+    def __init__(self, x: int, y: int):
         super().__init__()
-        self.image: 'Surface' = image
         self.x = x
         self.y = y
 
@@ -20,3 +23,6 @@ class BaseSprite(Sprite,
     def set_position(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
+
+    def update(self, delta) -> None:
+        self.constraints()

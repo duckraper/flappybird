@@ -20,7 +20,7 @@ class FloorSpawnerMixin:
         x = 0
 
         if len(floor_sprites) > 0:
-            velocity = floor_sprites[0].speed * self.manager.scene.game.get_delta()
+            velocity = floor_sprites[0].vx * self.manager.scene.game.get_delta()
             x = floor_sprites[-1].rect.right - velocity
 
         return Floor(x, FLOOR_Y, speed=self.manager.game_speed)

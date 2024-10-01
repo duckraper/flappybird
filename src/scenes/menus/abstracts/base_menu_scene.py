@@ -28,7 +28,8 @@ class BaseMenuScene(BaseScene,
 
         self.draw_menu(self.game.screen, title_shadow_width=5)
 
-    def update(self):
+    def update(self, *args, **kwargs
+               ):
         self._get_input()
 
     def _get_input(self):

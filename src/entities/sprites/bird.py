@@ -1,32 +1,36 @@
 from random import choice
 
-import pygame as pg
-
 from src.commons.audio_player import AudioPlayer
+from src.commons.constants import FLAP_VOLUME, JUMP_FORCE, GRAVITY_FORCE
 from src.core.game.settings import SCREEN_HEIGHT
-from src.core.physics import Physics
-from src.entities.abstracts.animated_sprite import AnimatedSprite
-from src.resources.sounds import sfx
+from src.entities.abstracts import AnimatedSprite, CollidableSprite, BaseSprite, MovingSprite
 from src.resources.spritesheets import bird_spritesheet
 
 
-class Bird(AnimatedSprite):
-    def __init__(self, x: int, y: int):
+class Bird(AnimatedSprite,
+           CollidableSprite,
+           MovingSprite,
+           BaseSprite):
+    def __init__(self, x: int, y: int, jump_force: float = JUMP_FORCE):
         spritesheet = bird_spritesheet[choice(list(bird_spritesheet.keys()))]
-        super().__init__(x, y, 16, *spritesheet)
+
+        MovingSprite.__init__(self)
+        AnimatedSprite.__init__(self, 16, *spritesheet)
+        BaseSprite.__init__(self, x, y)
 
         self.rect: 'Rect' = self.image.get_rect(center=(self.x, self.y))
-        self.mask = pg.mask.from_surface(self.image)
-        self.physics = Physics()
 
-    def jump(self):
+        self.jump_force = jump_force
+        self.velocity_y = 0
+
+    def jump(self, delta: float):
         self.set_current_frame(0)
-        AudioPlayer.play_sound(sfx.get('flap'))
+        AudioPlayer.play_sound('flap', volume=FLAP_VOLUME)
 
         if not self.get_animating():
             self.set_animating(True)
 
-        self.physics.jump()
+        self.set_speed(vy=-self.jump_force)
 
     def constraints(self):
         if self.rect.top < 0:
@@ -37,9 +41,8 @@ class Bird(AnimatedSprite):
             self.rect.bottom = SCREEN_HEIGHT
 
     def update(self, delta: float):
-        super().update(delta)
-
-        self.y = self.physics.update_position(self.y, delta)
+        self.animate(delta)
+        self.move(delta)
         self.rect.center = (self.x, self.y)
 
-        self.constraints()
+        super().update(delta)

@@ -1,29 +1,43 @@
+import math
+
+import pygame as pg
+
 from abc import ABC
 
-from .base_sprite import BaseSprite
-from ..interfaces import IMovingSprite
+from src.entities.interfaces import IMovingSprite
 
 
-class MovingSprite(BaseSprite, IMovingSprite, ABC):
-    def __init__(self, speed, image: 'Surface', x: int, y: int):
-        super().__init__(image, x, y)
-        self.speed = speed
-        self.moving = True
+class MovingSprite(pg.sprite.Sprite,
+                   IMovingSprite,
+                   ABC):
+    def __init__(self, vx = 0, vy = 0):
+        self.vx = vx
+        self.vy = vy
+        self.__moving = True
 
     def get_speed(self) -> float:
-        return self.speed
+        return self.vx
 
-    def set_speed(self, speed: float) -> None:
-        self.speed = speed
+    def set_speed(self, vx: float = 0, vy: float = 0) -> None:
+        self.vx = vx
+        self.vy = vy
 
     def get_moving(self) -> bool:
-        return self.moving
+        return self.__moving
 
     def set_moving(self, moving: bool) -> None:
-        self.moving = moving
+        self.__moving = moving
 
-    def update(self, delta):
+    def move_x(self, delta):
         if self.get_moving():
-            self.x -= self.speed * delta
+            self.x -= self.vx * delta
             self.rect.x = self.x
 
+    def move_y(self, delta):
+        if self.get_moving():
+            self.y += self.vy * delta
+            self.rect.y = self.y
+
+    def move(self, delta):
+        self.move_x(delta)
+        self.move_y(delta)

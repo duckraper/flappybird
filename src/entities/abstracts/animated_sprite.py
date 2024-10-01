@@ -1,43 +1,39 @@
-from abc import ABC
-
 import pygame as pg
 
-from src.entities import BaseSprite
+from abc import ABC
+
 from src.entities.interfaces import IAnimatedSprite
 
 
-class AnimatedSprite(BaseSprite,
+class AnimatedSprite(pg.sprite.Sprite,
                      IAnimatedSprite,
                      ABC):
-    def __init__(self, x: int, y: int, animation_speed: int, *spritesheet):
-        self.animation_speed = animation_speed
-        self.current_frame = 0
-        self.spritesheet = spritesheet
-        self.animating = False
+    def __init__(self, fps: int, *spritesheet):
+        self._fps = fps
+        self.__current_frame = 0
+        self.__spritesheet = spritesheet
+        self.__animating = False
 
-        image = self.spritesheet[self.current_frame]
-        super().__init__(image, x, y)
+        self.image = self.__spritesheet[self.__current_frame]
+        self.mask = pg.mask.from_surface(self.image)
 
     def get_current_frame(self) -> int:
-        return int(self.current_frame)
+        return int(self.__current_frame)
 
     def set_current_frame(self, frame: int) -> None:
-        self.current_frame = frame
+        self.__current_frame = frame
 
     def get_animating(self) -> bool:
-        return self.animating
+        return self.__animating
 
     def set_animating(self, animating: bool) -> None:
-        self.animating = animating
+        self.__animating = animating
 
     def animate(self, delta):
-        if self.animating:
-            self.current_frame += self.animation_speed * delta % len(self.spritesheet)
-            if self.current_frame >= len(self.spritesheet):
+        if self.__animating:
+            self.__current_frame += self._fps * delta % len(self.__spritesheet)
+            if self.__current_frame >= len(self.__spritesheet):
                 self.set_current_frame(0)
                 self.set_animating(False)
-            self.image = self.spritesheet[self.get_current_frame()]
+            self.image = self.__spritesheet[self.get_current_frame()]
             self.mask = pg.mask.from_surface(self.image)
-
-    def update(self, delta):
-        self.animate(delta)

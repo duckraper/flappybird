@@ -36,6 +36,10 @@ class IMovingSprite(ABC):
     def set_moving(self, moving: bool) -> None:
         pass
 
+    @abstractmethod
+    def move(self, delta: float) -> None:
+        pass
+
 
 class IAnimatedSprite(ABC):
     @abstractmethod
@@ -57,9 +61,17 @@ class IAnimatedSprite(ABC):
 
 class ICollidableSprite(ABC):
     @abstractmethod
-    def check_collision(self, other: 'ISprite') -> bool:
+    def check_collision(self, other: 'ISprite', collide_mask: bool) -> bool:
         pass
 
     @abstractmethod
     def on_collision(self, other: 'ISprite') -> None:
         pass
+
+    @abstractmethod
+    def resolve_collision(self, other: 'ISprite') -> None:
+        pass
+
+
+class ISolidSprite(ABC):
+    pass

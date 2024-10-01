@@ -4,7 +4,7 @@ import pygame as pg
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent  # src/
 
-FPS = 60
+FPS = 240
 
 GAME_TITLE = 'FlappyBird'
 GAME_ICON = pg.image.load(BASE_DIR.parent / 'assets' / 'img.ico')
@@ -13,8 +13,8 @@ SCREEN_WIDTH: int = 800
 SCREEN_HEIGHT: int = 600
 SCREEN_SIZE: tuple[int, int] = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
-MUSIC_VOLUME = 0.5
-SFX_VOLUME = 0.7
+MUSIC_VOLUME = 0.2
+SFX_VOLUME = 0.2
 
 KEY_BINDINGS = {
     'esc': pg.K_ESCAPE,
