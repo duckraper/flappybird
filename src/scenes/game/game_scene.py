@@ -1,6 +1,7 @@
 import pygame as pg
 
 from src.commons.helpers import is_pressed
+from src.commons.renderers import ScoreRenderer
 from src.scenes.abstracts.base_scene import BaseScene
 from src.scenes.managers.game_flow_manager import GameFlowManager
 from src.scenes.menus.game_over_menu_scene import GameOverScene
@@ -12,6 +13,12 @@ class GameScene(BaseScene):
         super().__init__(game)
 
         self.manager = GameFlowManager(self)
+        self.score_render = ScoreRenderer(self)
+
+        self.background = self.__setup_background()
+
+    def __setup_background(self):
+        pass
 
     def _get_input(self):
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))
@@ -38,6 +45,7 @@ class GameScene(BaseScene):
     def draw(self, *args, **kwargs):
         super().draw(bg_color='sky_blue')
         self.manager.draw_all_sprites()
+        self.score_render()
 
     def update(self, *args, **kwargs):
         self._get_input()
