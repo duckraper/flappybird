@@ -72,4 +72,3 @@ DIFFICULTY_LEVELS = {
     },
 
 }
-

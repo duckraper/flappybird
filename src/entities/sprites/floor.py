@@ -1,7 +1,5 @@
 from random import choice
 
-import pygame as pg
-
 from src.commons.constants import FLOOR_Y
 from src.core.game.settings import DIFFICULTY_LEVELS
 from src.entities.abstracts import SolidSprite, CollidableSprite, CommonSprite

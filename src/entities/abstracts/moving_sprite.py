@@ -1,8 +1,6 @@
-import math
+from abc import ABC
 
 import pygame as pg
-
-from abc import ABC
 
 from src.entities.interfaces import IMovingSprite
 
@@ -10,7 +8,7 @@ from src.entities.interfaces import IMovingSprite
 class MovingSprite(pg.sprite.Sprite,
                    IMovingSprite,
                    ABC):
-    def __init__(self, vx = 0, vy = 0):
+    def __init__(self, vx=0, vy=0):
         self.vx = vx
         self.vy = vy
         self.__moving = True

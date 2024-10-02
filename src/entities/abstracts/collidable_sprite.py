@@ -1,6 +1,6 @@
-import pygame as pg
+from abc import ABC
 
-from abc import ABC, abstractmethod
+import pygame as pg
 
 from src.entities.interfaces import ICollidableSprite
 
@@ -8,11 +8,11 @@ from src.entities.interfaces import ICollidableSprite
 class CollidableSprite(pg.sprite.Sprite,
                        ICollidableSprite,
                        ABC):
-    def check_collision(self, other: 'Sprite', collide_mask: bool=True) -> bool:
+    def check_collision(self, other: 'Sprite', collide_mask: bool = True) -> bool:
         return bool(
             pg.sprite.collide_rect(self, other) \
-            if not collide_mask \
-            else pg.sprite.collide_mask(self, other)
+                if not collide_mask \
+                else pg.sprite.collide_mask(self, other)
         )
 
     def on_collision(self, other: 'Sprite') -> None:

@@ -12,6 +12,7 @@ class BaseSprite(Sprite,
     base class thatt provides a simple interface for most sprite_group
     like getting and setting position and updating constraints
     """
+
     def __init__(self, x: int, y: int):
         super().__init__()
         self.x = x

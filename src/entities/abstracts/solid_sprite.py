@@ -1,6 +1,6 @@
-import pygame as pg
-
 from abc import ABC
+
+import pygame as pg
 
 from src.entities.interfaces import ISolidSprite
 

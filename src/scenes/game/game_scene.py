@@ -1,16 +1,11 @@
 import pygame as pg
-import random as r
 
-from src.commons.assets_loader import AssetsLoader, ASSETS_DIR
 from src.commons.helpers import is_pressed
 from src.commons.renderers import ScoreRenderer
-from src.core.game.settings import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_SIZE
-from src.entities.sprites.background import Background
 from src.scenes.abstracts.base_scene import BaseScene
 from src.scenes.managers.game_flow_manager import GameFlowManager
 from src.scenes.menus.game_over_menu_scene import GameOverScene
 from src.scenes.menus.pause_menu_scene import PauseMenuScene
-from src.resources.backgrounds import backgrounds
 
 
 class GameScene(BaseScene):
@@ -19,7 +14,6 @@ class GameScene(BaseScene):
 
         self.manager = GameFlowManager(self)
         self.score_render = ScoreRenderer(self)
-
 
         self.x = 0
 

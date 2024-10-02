@@ -38,4 +38,3 @@ def get_color(color: str | tuple) -> tuple:
 
 def is_between(value: float | int, minimum: int, maximum: int):
     return minimum <= value <= maximum
-

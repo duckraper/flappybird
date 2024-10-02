@@ -20,7 +20,7 @@ floor_spritesheet = {
     'inverted': pg.transform.flip(
         AssetsLoader.load_sprites(directory="floor",
                                   file_pattern="floor-0{i}.png",
-                                   size=FLOOR_SIZE), True, False)
+                                  size=FLOOR_SIZE), True, False)
 }
 
 pipe_spritesheet = {

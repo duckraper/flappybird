@@ -9,6 +9,6 @@ sfx_files = list(SFX_DIR.iterdir())
 
 sfx = {
     f.stem:
-    AssetsLoader.load_sound(SFX_DIR.joinpath(f), 0.08)
+        AssetsLoader.load_sound(SFX_DIR.joinpath(f), 0.08)
     for f in sfx_files
 }

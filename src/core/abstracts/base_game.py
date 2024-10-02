@@ -9,7 +9,7 @@ class BaseGame(ABC):
     def __init__(self, *args, **kwargs):
         self.running: bool = False
         self.screen: 'Surface' = pg.display.set_mode(size=SCREEN_SIZE,
-                                                              flags=kwargs.get('flags', 0))
+                                                     flags=kwargs.get('flags', 0))
         self.clock: 'Clock' = pg.time.Clock()
         self.title: str = kwargs.get('title', GAME_TITLE)
         self.icon: 'Surface' = kwargs.get('icon', None)
