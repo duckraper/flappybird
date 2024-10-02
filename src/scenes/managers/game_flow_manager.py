@@ -33,7 +33,8 @@ class GameFlowManager(SpriteManagerMixin,
         self.pipes = pg.sprite.Group()
         self.floor = pg.sprite.Group()
         self.bird = pg.sprite.GroupSingle(bird)
-        self.background = Background(choice(backgrounds).copy())
+        self.background = Background(image=choice(backgrounds).copy(),
+                                     vx=self.scene.game.di)
 
         self.sprites = pg.sprite.LayeredUpdates(
             # [self.background, self.floor, self.bird, self.pipes]

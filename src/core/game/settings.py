@@ -16,6 +16,8 @@ SCREEN_SIZE: tuple[int, int] = (SCREEN_WIDTH, SCREEN_HEIGHT)
 MUSIC_VOLUME = 0.2
 SFX_VOLUME = 0.2
 
+DIFFICULTY = 'medium'
+
 KEY_BINDINGS = {
     'esc': pg.K_ESCAPE,
     'space': pg.K_SPACE,

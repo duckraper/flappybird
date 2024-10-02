@@ -19,7 +19,8 @@ class Background(SolidSprite,
         if self.rect.left < 0 and not hasattr(self, 'next_bg'):
             self.next_bg = self.__class__(self.image.copy(),
                                           x=self.rect.right,
-                                          alpha=self.alpha)
+                                          alpha=self.alpha,
+                                          vx=self.vx)
             group = self.groups()[0]
             if hasattr(group, 'layer'):
                 group.add(self.next_bg, layer=self.layer)
