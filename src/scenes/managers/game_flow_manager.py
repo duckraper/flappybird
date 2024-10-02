@@ -1,3 +1,5 @@
+from random import choice
+
 import pygame as pg
 
 from src.commons.audio_player import AudioPlayer
@@ -6,6 +8,8 @@ from src.core.game.settings import DIFFICULTY_LEVELS
 from src.core.mixins import SpriteManagerMixin, CollisionDetectionMixin, GameLogicMixin
 from src.core.physics import Physics
 from src.entities.spawner import EntitiySpawner
+from src.entities.sprites.background import Background
+from src.resources.backgrounds import backgrounds
 
 
 class GameFlowManager(SpriteManagerMixin,
@@ -29,8 +33,17 @@ class GameFlowManager(SpriteManagerMixin,
         self.pipes = pg.sprite.Group()
         self.floor = pg.sprite.Group()
         self.bird = pg.sprite.GroupSingle(bird)
-        self.sprites = pg.sprite.Group([self.floor, self.bird, self.pipes])
+        self.background = Background(choice(backgrounds).copy())
 
+        self.sprites = pg.sprite.LayeredUpdates(
+            # [self.background, self.floor, self.bird, self.pipes]
+        )
+        self.sprites.add(self.background, layer=0)
+        self.sprites.add(self.bird, layer=1)
+        self.sprites.add(self.pipes, layer=2)
+        self.sprites.add(self.floor, layer=3)
+
+        print(self.sprites.layers)
         self.game_over = False
         self.score = 0
 

@@ -16,7 +16,7 @@ class Floor(SolidSprite,
     def __init__(self, x=0, y=FLOOR_Y, speed=DIFFICULTY_LEVELS['medium']['speed']):
         image = floor_spritesheet[choice(list(floor_spritesheet.keys()))]
 
-        MovingSprite.__init__(self, vx=speed)
+        MovingSprite.__init__(self, vx=-speed)
         CommonSprite.__init__(self, image, x, y, topleft=(x, y))
 
     def constraints(self):
@@ -24,7 +24,6 @@ class Floor(SolidSprite,
             self.kill()
 
     def update(self, delta):
-        super().update(delta)
         self.move_x(delta)
 
         self.constraints()

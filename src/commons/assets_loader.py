@@ -23,7 +23,7 @@ class AssetsLoader:
                      colorkey=None) -> Union[list['Surface'], 'Surface']:
         """
          usage:
-            other = load_sprites("path/to/__spritesheet", "sprite_name-0{i}.png", (50, 50), (0, 0, 0))
+            other = load_sprites("path/to/spritesheet", "sprite_name-0{i}.png", (50, 50), (0, 0, 0))
             where n is the number of the other frame
         """
         imgs_dir: Path = SPRITES_DIR.joinpath(directory)

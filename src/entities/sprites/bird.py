@@ -45,4 +45,4 @@ class Bird(AnimatedSprite,
         self.move(delta)
         self.rect.center = (self.x, self.y)
 
-        super().update(delta)
+        self.constraints()

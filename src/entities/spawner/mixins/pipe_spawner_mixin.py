@@ -16,7 +16,7 @@ class PipeSpawnerMixin:
 
             if pipes:
                 self.manager.pipes.add(pipes)
-                self.manager.sprites.add(pipes)
+                self.manager.sprites.add(pipes, layer=2)
 
                 self.last_spawn_time = now
 

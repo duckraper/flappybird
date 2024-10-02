@@ -12,8 +12,9 @@ class CommonSprite(BaseSprite,
     example usage:
        sprite = CommonSprite(image, x, y, center=(x, y))
     """
-    def __init__(self, image: 'Surface', x: int, y: int, **pos_kwargs):
+    def __init__(self, image: 'Surface', x: int, y: int, hasnt_mask: bool = False, **kwargs):
         super().__init__(x, y)
         self.image = image
-        self.rect = self.image.get_rect(**pos_kwargs)
-        self.mask = pg.mask.from_surface(self.image)
+        self.rect = self.image.get_rect(**kwargs)
+        self.mask = pg.mask.from_surface(self.image) \
+        if not hasnt_mask else None

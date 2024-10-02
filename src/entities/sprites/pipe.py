@@ -12,7 +12,7 @@ class Pipe(SolidSprite,
     def __init__(self, x, y, color, upside_down: bool = False, speed=DIFFICULTY_LEVELS['medium']['speed']):
         image = pipe_spritesheet[color]
 
-        MovingSprite.__init__(self, vx=speed)
+        MovingSprite.__init__(self, vx=-speed)
 
         if upside_down:
             CommonSprite.__init__(self, image, x, y, midbottom=(x, y))

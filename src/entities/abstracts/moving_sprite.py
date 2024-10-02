@@ -30,7 +30,7 @@ class MovingSprite(pg.sprite.Sprite,
 
     def move_x(self, delta):
         if self.get_moving():
-            self.x -= self.vx * delta
+            self.x += self.vx * delta
             self.rect.x = self.x
 
     def move_y(self, delta):

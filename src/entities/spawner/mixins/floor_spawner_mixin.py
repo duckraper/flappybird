@@ -13,7 +13,7 @@ class FloorSpawnerMixin:
             new_floor = self.create_floor()
 
             self.manager.floor.add(new_floor)
-            self.manager.sprites.add(new_floor)
+            self.manager.sprites.add(new_floor, layer=3)
 
     def create_floor(self) -> Floor:
         floor_sprites = self.manager.floor.sprites()
@@ -21,6 +21,6 @@ class FloorSpawnerMixin:
 
         if len(floor_sprites) > 0:
             velocity = floor_sprites[0].vx * self.manager.scene.game.get_delta()
-            x = floor_sprites[-1].rect.right - velocity
+            x = floor_sprites[-1].rect.right + velocity
 
         return Floor(x, FLOOR_Y, speed=self.manager.game_speed)

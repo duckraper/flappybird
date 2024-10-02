@@ -24,12 +24,11 @@ class BaseMenuScene(BaseScene,
         self.startup()
 
     def draw(self, *args, **kwargs):
-        super().draw(bg_color='sky_blue')
+        super().draw(bg='sky_blue')
 
         self.draw_menu(self.game.screen, title_shadow_width=5)
 
-    def update(self, *args, **kwargs
-               ):
+    def update(self, *args, **kwargs):
         self._get_input()
 
     def _get_input(self):

@@ -23,6 +23,3 @@ class BaseSprite(Sprite,
     def set_position(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
-
-    def update(self, delta) -> None:
-        self.constraints()
