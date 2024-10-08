@@ -1,19 +1,23 @@
 import sys
-
-from src.core.game import Game
-from src.core.game.settings import GAME_ICON, GAME_TITLE
+import pygame as pg
 
 
 def main() -> None:
+    pg.init()
+    pg.display.init()
+    pg.display.set_mode((1, 1))
+    pg.mixer.init()
+    pg.font.init()
+
+    from src.core.game import Game, settings as s
+
     game = Game(
-        title=GAME_TITLE,
-        icon=GAME_ICON
+        title=s.GAME_TITLE,
+        icon=s.GAME_ICON
     )
 
     game.run()
-
     sys.exit(0)
-
 
 if __name__ == '__main__':
     main()

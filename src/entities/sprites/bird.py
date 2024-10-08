@@ -1,9 +1,9 @@
 from random import choice
 
 from src.commons.audio_player import AudioPlayer
-from src.commons.constants import FLAP_VOLUME, JUMP_FORCE
-from src.core.game.settings import SCREEN_HEIGHT
-from src.entities.abstracts import AnimatedSprite, CollidableSprite, BaseSprite, MovingSprite
+from src.commons.constants import JUMP_FORCE
+from src.core.game.settings import SCREEN_HEIGHT, FLAP_VOLUME
+from src.entities.sprites.abstracts import AnimatedSprite, CollidableSprite, BaseSprite, MovingSprite
 from src.resources.spritesheets import bird_spritesheet
 
 

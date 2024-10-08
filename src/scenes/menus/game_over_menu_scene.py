@@ -11,9 +11,9 @@ class GameOverScene(BaseMenuScene):
     def perform_restart(self):
         from ..game.game_scene import GameScene
 
-        self.game.set_scene(GameScene(game=self.game))
+        self.change_scene(GameScene(game=self.game))
 
     def perform_quit(self):
         from .main_menu_scene import MainMenuScene
 
-        self.game.set_scene(MainMenuScene(game=self.game))
+        self.change_scene(MainMenuScene(game=self.game))

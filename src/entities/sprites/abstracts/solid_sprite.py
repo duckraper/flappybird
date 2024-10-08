@@ -2,7 +2,7 @@ from abc import ABC
 
 import pygame as pg
 
-from src.entities.interfaces import ISolidSprite
+from src.entities.sprites.interfaces import ISolidSprite
 
 
 class SolidSprite(pg.sprite.Sprite,

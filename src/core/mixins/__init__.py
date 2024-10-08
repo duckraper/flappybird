@@ -1,6 +1,4 @@
-from .collision_detection_mixin import CollisionDetectionMixin
 from .delta_time_manager_mixin import DeltaTimeManagerMixin
 from .event_manager_mixin import EventManagerMixin
-from .game_logic_mixin import GameLogicMixin
 from .scene_manager_mixin import SceneManagerMixin
-from .sprite_manager_mixin import SpriteManagerMixin
+from .settings_manager_mixin import SettingsManagerMixin

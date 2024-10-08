@@ -1,3 +1,4 @@
+from src.commons.audio_player import AudioPlayer
 from src.scenes.menus.abstracts.base_menu_scene import BaseMenuScene
 
 
@@ -14,15 +15,15 @@ class PauseMenuScene(BaseMenuScene):
         scene = self.game.scenes_stack.pop()
 
         self.stop_running()
-        self.game.set_scene(scene)
-
+        self.change_scene(scene)
+        AudioPlayer.resume_music()
         scene.running = True
 
     def perform_restart(self):
         scene = self.game.scenes_stack.pop()
 
         self.stop_running()
-        self.game.set_scene(scene.__class__(game=self.game))
+        self.change_scene(scene.__class__(game=self.game))
 
     def perform_main_menu(self):
         from .main_menu_scene import MainMenuScene
@@ -30,4 +31,4 @@ class PauseMenuScene(BaseMenuScene):
         scene = self.game.scenes_stack.pop()
 
         self.stop_running()
-        self.game.set_scene(MainMenuScene(game=self.game))
+        self.change_scene(MainMenuScene(game=self.game))

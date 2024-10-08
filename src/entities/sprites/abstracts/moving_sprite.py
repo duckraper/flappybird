@@ -2,7 +2,7 @@ from abc import ABC
 
 import pygame as pg
 
-from src.entities.interfaces import IMovingSprite
+from src.entities.sprites.interfaces import IMovingSprite
 
 
 class MovingSprite(pg.sprite.Sprite,

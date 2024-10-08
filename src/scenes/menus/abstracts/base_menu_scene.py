@@ -1,32 +1,33 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from enum import IntEnum
 
 import pygame as pg
 
 from src.commons.helpers import is_pressed
 from src.scenes.abstracts.base_scene import BaseScene
-from src.scenes.menus.mixins import MenuActionHandlerMixin, MenuRenderMixin
+from src.scenes.managers import MenuActionsManger
 
 UP, DOWN = (-1, 1)
 
 
 class BaseMenuScene(BaseScene,
-                    MenuActionHandlerMixin,
-                    MenuRenderMixin,
                     ABC):
     def __init__(self, game, menu_title, *options):
         super().__init__(game)
-
-        self.menu_title = menu_title
-        self.menu_option = IntEnum('Option', options)
-        self.selected_option = 1
+        self.title = menu_title
+        self.options_list = IntEnum('Options', options)
+        self.manager = MenuActionsManger(self, options)
 
         self.startup()
+
+    def update_options_list(self):
+        pass
 
     def draw(self, *args, **kwargs):
         super().draw(bg='sky_blue')
 
-        self.draw_menu(self.game.screen, title_shadow_width=5)
+        self.manager.draw_menu(self.game.screen,
+                                title_shadow_width=5)
 
     def update(self, *args, **kwargs):
         self._get_input()
@@ -35,9 +36,9 @@ class BaseMenuScene(BaseScene,
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))
 
         if is_pressed(keydown_events, 'up'):
-            self.update_selected_option(UP)
+            self.manager.update_selected_option(UP)
         elif is_pressed(keydown_events, 'down'):
-            self.update_selected_option(DOWN)
+            self.manager.update_selected_option(DOWN)
         elif is_pressed(keydown_events, ['enter', 'space']):
             # calls the function f'perform_{action}'
-            self.call_method(self.selected_option_name)
+            self.manager.call_method(self.manager.selected_option_name)

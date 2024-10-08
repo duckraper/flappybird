@@ -1,5 +1,6 @@
 from src.commons.constants import BG_SPEED, DEFAULT_BG_ALPHA, DEFAULT_BG_LAYER
-from src.entities.abstracts import CommonSprite, SolidSprite, MovingSprite
+from src.core.game.settings import SCREEN_WIDTH
+from src.entities.sprites.abstracts import CommonSprite, SolidSprite, MovingSprite
 
 
 class Background(SolidSprite,
@@ -16,7 +17,7 @@ class Background(SolidSprite,
         self.layer = kwargs.get('layer', DEFAULT_BG_LAYER)
 
     def constraints(self) -> None:
-        if self.rect.left < 0 and not hasattr(self, 'next_bg'):
+        if (self.rect.left < 0 or self.rect.right < SCREEN_WIDTH) and not hasattr(self, 'next_bg'):
             self.next_bg = self.__class__(self.image.copy(),
                                           x=self.rect.right,
                                           alpha=self.alpha,

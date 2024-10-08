@@ -6,6 +6,7 @@ from src.entities.spawner.base import BaseSpawner
 from src.entities.spawner.mixins import BirdSpawnerMixin, PipeSpawnerMixin, FloorSpawnerMixin
 
 
+# factory class for spawning entities
 class EntitiySpawner(BirdSpawnerMixin,
                      PipeSpawnerMixin,
                      FloorSpawnerMixin,
@@ -22,6 +23,9 @@ class EntitiySpawner(BirdSpawnerMixin,
 
     def __call__(self, entity_type: str) -> Sprite | list[Sprite]:
         return self.spawn(entity_type)
+
+    def set_spawn_rate(self, spawn_rate):
+        self.spawn_rate = spawn_rate
 
     def spawn(self, entity_type: str) -> Sprite | list[Sprite]:
         spawn_method = f'spawn_{entity_type}'

@@ -1,11 +1,13 @@
-from random import choice
+from random import choice, randint
 
 import pygame as pg
 
 from src.commons.audio_player import AudioPlayer
+from src.commons.constants import BG_SPEED
+from src.commons.decorators import has_sfx
 from src.commons.helpers import is_pressed
-from src.core.game.settings import DIFFICULTY_LEVELS
-from src.core.mixins import SpriteManagerMixin, CollisionDetectionMixin, GameLogicMixin
+from src.core.game.settings import DIFFICULTY_LEVELS, DIE_VOLUME
+from src.scenes.managers.mixins import SpriteManagerMixin, CollisionDetectionMixin, GameLogicMixin
 from src.core.physics import Physics
 from src.entities.spawner import EntitiySpawner
 from src.entities.sprites.background import Background
@@ -21,6 +23,7 @@ class GameFlowManager(SpriteManagerMixin,
 
         self.game_speed = self.get_game_prop('speed')
         self.spawn_rate = self.get_game_prop('spawn_rate')
+        self.hardened_value = 0
 
         self.max_pipes_offset = self.get_game_prop('max_pipes_offset')
         self.min_pipes_offset = self.get_game_prop('min_pipes_offset')
@@ -34,17 +37,15 @@ class GameFlowManager(SpriteManagerMixin,
         self.floor = pg.sprite.Group()
         self.bird = pg.sprite.GroupSingle(bird)
         self.background = Background(image=choice(backgrounds).copy(),
-                                     vx=self.scene.game.di)
+                                     vx=BG_SPEED)
 
-        self.sprites = pg.sprite.LayeredUpdates(
-            # [self.background, self.floor, self.bird, self.pipes]
-        )
+        self.sprites = pg.sprite.LayeredUpdates()
+
         self.sprites.add(self.background, layer=0)
         self.sprites.add(self.bird, layer=1)
         self.sprites.add(self.pipes, layer=2)
         self.sprites.add(self.floor, layer=3)
 
-        print(self.sprites.layers)
         self.game_over = False
         self.score = 0
 
@@ -53,6 +54,13 @@ class GameFlowManager(SpriteManagerMixin,
     @property
     def screen(self):
         return self.scene.game.screen
+
+    def set_spawn_rate(self, spawn_rate):
+        self.spawn_rate = spawn_rate
+        self.spawner.set_spawn_rate(spawn_rate)
+
+    def set_game_speed(self, game_speed):
+        self.game_speed = game_speed
 
     def get_game_prop(self, prop) -> int:
         return DIFFICULTY_LEVELS[self.scene.game.difficulty][prop]
@@ -65,11 +73,12 @@ class GameFlowManager(SpriteManagerMixin,
                 self.bird.sprite.jump(self.scene.game.get_delta())
 
     def start_game(self):
+        AudioPlayer.set_music()
+        AudioPlayer.play_music(loops=1)
         self.scene.startup()
 
     def perform_game_over(self):
-        # todo: arreglar los sonidos de todo el juego
-        AudioPlayer.play_sound('die')
+        AudioPlayer.stop_music()
         self.scene.perform_game_over()
 
     def spawn_sprites(self):
@@ -83,6 +92,7 @@ class GameFlowManager(SpriteManagerMixin,
         self.physics.apply_gravity(self.sprites, delta)
         self.handle_collisions()
         self.check_score()
+        self.scene.game.content = 'speed: ' + str(self.spawn_rate)
 
     def __get_bird_starting_coords(self):
         x = self.screen.get_width() // 6

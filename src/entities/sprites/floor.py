@@ -2,8 +2,8 @@ from random import choice
 
 from src.commons.constants import FLOOR_Y
 from src.core.game.settings import DIFFICULTY_LEVELS
-from src.entities.abstracts import SolidSprite, CollidableSprite, CommonSprite
-from src.entities.abstracts.moving_sprite import MovingSprite
+from src.entities.sprites.abstracts import SolidSprite, CollidableSprite, CommonSprite
+from src.entities.sprites.abstracts import MovingSprite
 from src.resources.spritesheets import floor_spritesheet
 
 

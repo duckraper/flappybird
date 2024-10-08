@@ -1,7 +1,10 @@
 import pygame as pg
 
+from time import time
+
 from src.core.game.settings import KEY_BINDINGS, DIFFICULTY_LEVELS, DIFFICULTY
 from .constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
+
 
 
 def get_difficulty_prop(prop, difficulty=DIFFICULTY):

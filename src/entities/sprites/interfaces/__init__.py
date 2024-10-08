@@ -68,6 +68,8 @@ class ICollidableSprite(ABC):
     def on_collision(self, other: 'ISprite') -> None:
         pass
 
+
+
     @abstractmethod
     def resolve_collision(self, other: 'ISprite') -> None:
         pass

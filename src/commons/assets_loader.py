@@ -45,9 +45,7 @@ class AssetsLoader:
 
     @staticmethod
     def load_music(filepath: Path | str) -> None:
-        if not pg.mixer.get_init():
-            pg.mixer.init()
-        pg.mixer.music.load(filepath)
+        pass
 
     @staticmethod
     def load_sound(filepath: Path | str, volume: float = 1.0) -> 'Sound':

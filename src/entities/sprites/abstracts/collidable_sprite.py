@@ -2,13 +2,13 @@ from abc import ABC
 
 import pygame as pg
 
-from src.entities.interfaces import ICollidableSprite
+from src.entities.sprites.interfaces import ICollidableSprite
 
 
 class CollidableSprite(pg.sprite.Sprite,
                        ICollidableSprite,
                        ABC):
-    def check_collision(self, other: 'Sprite', collide_mask: bool = True) -> bool:
+    def check_collision(self, other: 'Sprite' , collide_mask: bool = True) -> bool:
         return bool(
             pg.sprite.collide_rect(self, other) \
                 if not collide_mask \

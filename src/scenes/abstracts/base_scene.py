@@ -1,3 +1,5 @@
+import pygame as pg
+
 from abc import ABC
 
 from src.commons.constants import BASE_COLOR
@@ -15,15 +17,26 @@ class BaseScene(IScene, ABC):
         #       que se le pase como argumento, si no se le pasa
         #       fondo, se debe usar una superficie con el color
         #       base del juego definido en constants.py
-        self.background = kwargs.get('background', None)
+
+        bg = pg.Surface(self.game.get_screen().get_size()).fill(get_color(BASE_COLOR))
+        self.background = kwargs.get('background', bg)
+
+        self.music = kwargs.get('music', None)
+
+    def change_scene(self, scene: 'Scene'):
+        self.game.set_scene(scene)
 
     def stop_running(self):
         self.running = False
 
-    def startup(self):
-        self.running = True
+    def startup(self):self.running = True
+
+    def update(self, *args, **kwargs):
+        self.background.update(self.game.get_delta())
 
     def draw(self, *args, **kwargs):
-        bg_color = get_color(kwargs.get('bg', BASE_COLOR))
-
-        self.game.screen.fill(bg_color)
+        if self.background is not None:
+            self.background
+        # bg_color = get_color(kwargs.get('bg', BASE_COLOR))
+        #
+        # self.game.screen.fill(bg_color)

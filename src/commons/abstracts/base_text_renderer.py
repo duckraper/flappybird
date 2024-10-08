@@ -1,5 +1,6 @@
 from abc import ABC
 from functools import lru_cache
+from typing import Union
 
 import pygame as pg
 
@@ -8,8 +9,20 @@ from src.commons.helpers import get_font, get_color
 
 class BaseTextRenderer(ABC):
     def render(
-            self, surface: pg.Surface, position: tuple[int, int], text: str, **kwargs
+            self,
+            surface: pg.Surface,
+            position: Union[tuple[int, int], 'Rect'],
+            text: str, **kwargs
     ) -> None:
+        text_surface = self.get_surface(text, **kwargs)
+
+        if isinstance(position, pg.Rect):
+            position = position.center
+        text_rect = text_surface.get_rect(center=position)
+
+        surface.blit(text_surface, text_rect)
+
+    def get_surface(self, text: str, **kwargs) -> pg.Surface:
         font_type = kwargs.get('font_name', 'default')
         font_size = kwargs.get('font_size', 32)
         font_color = kwargs.get('font_color', 'white')
@@ -20,14 +33,11 @@ class BaseTextRenderer(ABC):
 
         font = get_font(font_name=font_type, font_size=font_size)
 
-        text_surface = self.__render_with_outline(text, font, font_color,
-                                                  outline_color=outline_color,
-                                                  outline_width=outline_width,
-                                                  shadow_width=shadow_width,
-                                                  shadow_color=shadow_color)
-
-        text_rect = text_surface.get_rect(center=position)
-        surface.blit(text_surface, text_rect)
+        return self.__render_with_outline(text, font, font_color,
+                                          outline_color=outline_color,
+                                          outline_width=outline_width,
+                                          shadow_width=shadow_width,
+                                          shadow_color=shadow_color)
 
     @lru_cache(maxsize=128)
     def __render_with_outline(self, text, font, text_color, **kwargs) -> pg.Surface:

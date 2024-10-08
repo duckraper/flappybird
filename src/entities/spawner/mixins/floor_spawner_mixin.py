@@ -7,7 +7,7 @@ class FloorSpawnerMixin:
     last_spawned_right_x = 0
 
     def spawn_floor(self) -> None:
-        max_floor_sprites_in_screen = SCREEN_WIDTH // FLOOR_WIDTH + 2
+        max_floor_sprites_in_screen = SCREEN_WIDTH // FLOOR_WIDTH + 4
 
         while len(self.manager.floor.sprites()) < max_floor_sprites_in_screen:
             new_floor = self.create_floor()

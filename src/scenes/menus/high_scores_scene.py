@@ -13,4 +13,4 @@ class HighScoresScene(BaseMenuScene):
         from .main_menu_scene import MainMenuScene
 
         self.stop_running()
-        self.game.set_scene(MainMenuScene(game=self.game))
+        self.change_scene(MainMenuScene(game=self.game))

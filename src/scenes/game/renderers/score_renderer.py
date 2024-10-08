@@ -19,6 +19,6 @@ class ScoreRenderer(BaseTextRenderer):
         super().render(surface=screen,
                        position=(x, y),
                        text=str(self.scene.manager.score),
-                       font_size=SCREEN_WIDTH // 11,
+                       font_size=SCREEN_HEIGHT // 8,
                        outline_width=2,
                        shadow_width=2)
