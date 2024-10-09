@@ -1,8 +1,7 @@
 from enum import IntEnum
 
-from src.commons.audio_player import AudioPlayer
-from src.core.game.settings import SWOOSH_VOLUME
 from src.commons.decorators import has_sfx
+from src.core.game.settings import SWOOSH_VOLUME
 from src.scenes.managers.mixins import MenuRendererMixin
 
 

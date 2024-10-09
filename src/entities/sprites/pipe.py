@@ -22,7 +22,7 @@ class Pipe(SolidSprite,
         self.spawn_time = time()
 
     def constraints(self):
-        if self.rect.right < -self.rect.width:
+        if self.rect.right < 0:
             self.kill()
 
     def update(self, delta):

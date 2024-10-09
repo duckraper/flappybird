@@ -3,14 +3,14 @@ from src.scenes.menus.abstracts.base_menu_scene import BaseMenuScene
 
 class HighScoresScene(BaseMenuScene):
     # TODO: terminar esta escena, y gestionar como hacerla funcionar
-    def __init__(self, game):
+    def __init__(self, game, **kwargs):
         options_list = [
             'Return',
         ]
-        super().__init__(game, 'HighScores', *options_list)
+        super().__init__(game, 'HighScores', *options_list, **kwargs)
 
     def perform_return(self):
-        from .main_menu_scene import MainMenuScene
-
         self.stop_running()
-        self.change_scene(MainMenuScene(game=self.game))
+        menu = self.game.scenes_stack.pop()
+        self.change_scene(menu)
+

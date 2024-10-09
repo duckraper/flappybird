@@ -6,3 +6,8 @@ class SpriteManagerMixin:
         self.sprites.draw(self.screen)
 
         self.floor.draw(self.screen)
+
+    def spawn_sprites(self):
+        if not self.game_over:
+            self.spawner('floor')
+            self.spawner('pipe')

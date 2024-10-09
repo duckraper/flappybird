@@ -1,5 +1,4 @@
 import configparser as cp
-
 from pathlib import Path
 
 import pygame as pg
@@ -11,7 +10,7 @@ config = cp.ConfigParser()
 config.read(DATA_DIR / 'config.ini')
 
 # screne confg
-FPS = 60
+FPS = 120
 GAME_TITLE = 'FlappyBird'
 GAME_ICON = pg.image.load(BASE_DIR.parent / 'assets' / 'img.ico')
 
@@ -33,40 +32,45 @@ DIFFICULTY_LEVELS = {
     'chill': {
         'speed': SCREEN_WIDTH // 8,
         'spawn_rate': 5,
-        'max_pipes_offset': SCREEN_HEIGHT // 1.5,
-        'min_pipes_offset': SCREEN_HEIGHT // 3,
+        'max_pipes_y_offset': SCREEN_HEIGHT // 1.5,
+        'min_pipes_y_offset': SCREEN_HEIGHT // 3,
+        'pipes_x_offset': SCREEN_WIDTH // 2,
         'description': "This is the easiest difficulty, perfect for beginners. "
                        "The game will be slow and the pipes will be far far apart."
     },
     'easy': {
         'speed': SCREEN_WIDTH // 4,
         'spawn_rate': 1.7,
-        'max_pipes_offset': SCREEN_HEIGHT // 2,
-        'min_pipes_offset': SCREEN_HEIGHT // 4,
+        'max_pipes_y_offset': SCREEN_HEIGHT // 2,
+        'min_pipes_y_offset': SCREEN_HEIGHT // 4,
+        'pipes_x_offset': SCREEN_WIDTH // 2.6,
         'description': "This is a beginner-friendly difficulty. "
                        "The game will be a bit faster and the pipes will be closer."
     },
     'medium': {
         'speed': SCREEN_WIDTH // 2.6,
         'spawn_rate': 1.2,
-        'max_pipes_offset': SCREEN_HEIGHT // 4,
-        'min_pipes_offset': SCREEN_HEIGHT // 5,
+        'max_pipes_y_offset': SCREEN_HEIGHT // 4,
+        'min_pipes_y_offset': SCREEN_HEIGHT // 5,
+        'pipes_x_offset': SCREEN_WIDTH // 3.2,
         'description': "This is the default difficulty. "
                        "The game will be fast and the pipes will be very close."
     },
     'hard': {
         'speed': SCREEN_WIDTH // 1.8,
         'spawn_rate': 0.9,
-        'max_pipes_offset': SCREEN_HEIGHT // 6,
-        'min_pipes_offset': SCREEN_HEIGHT // 7,
+        'max_pipes_y_offset': SCREEN_HEIGHT // 6,
+        'min_pipes_y_offset': SCREEN_HEIGHT // 7,
+        'pipes_x_offset': SCREEN_WIDTH // 2.1,
         'description': "This is a challenging difficulty. "
                        "The game will be very fast and the pipes will be extremely close."
     },
     'insane': {
         'speed': SCREEN_WIDTH // 1.5,
         'spawn_rate': 0.9,
-        'max_pipes_offset': SCREEN_HEIGHT // 7,
-        'min_pipes_offset': SCREEN_HEIGHT // 8,
+        'max_pipes_y_offset': SCREEN_HEIGHT // 7,
+        'min_pipes_y_offset': SCREEN_HEIGHT // 8,
+        'pipes_x_offset': SCREEN_WIDTH // 2.4,
         'description': "This is the hardest difficulty. "
                        "The game will be extremely fast and the pipes will be very close."
     },

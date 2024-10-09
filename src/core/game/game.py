@@ -1,11 +1,16 @@
+from random import choice
+
 import pygame as pg
 
 from src.commons import Debug
-from src.commons.constants import BASE_COLOR, MONITOR_SIZE
+from src.commons.constants import BASE_COLOR
+from src.commons.helpers import darken_image
 from src.core.events import GameEvent
 from src.core.game.settings import FPS, DIFFICULTY_LEVELS, SCREEN_SIZE, GAME_TITLE
 from src.core.mixins import EventManagerMixin, SceneManagerMixin, SettingsManagerMixin
 from src.core.mixins.delta_time_manager_mixin import DeltaTimeManagerMixin
+from src.entities.sprites.background import Background
+from src.resources.backgrounds import backgrounds
 from src.scenes.menus.main_menu_scene import MainMenuScene
 from src.scenes.menus.pause_menu_scene import PauseMenuScene
 
@@ -29,6 +34,9 @@ class Game(EventManagerMixin,
         self.content = None
         self.scene = None
 
+        self.menus_bg_img = darken_image(choice(backgrounds).copy())
+        # todo: sistema de puntaje
+
         self.difficulty = 'medium'
 
         if self.exists_config():
@@ -47,7 +55,7 @@ class Game(EventManagerMixin,
 
         self.running = True
 
-        self.set_scene(MainMenuScene(game=self))
+        self.set_scene(MainMenuScene(game=self, background=Background(self.menus_bg_img.copy(), vx=-100)))
 
     def stop_running(self):
         self.running = False
@@ -86,7 +94,9 @@ class Game(EventManagerMixin,
         self.screen.fill(BASE_COLOR)
         self.draw_scene()
         if self.scene.__class__.__name__ == 'GameScene':
+            pass
             self.debugger.draw(info=self.content)
+        # self.debugger.draw(info=self.clock.get_fps(), position=(0, 0))
 
         pg.display.flip()
 

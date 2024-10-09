@@ -1,4 +1,6 @@
+import os
 import random as r
+
 from time import time
 
 from src.commons.constants import INGAME_DEADZONE
@@ -11,7 +13,15 @@ from src.resources.spritesheets import pipe_spritesheet
 class PipeSpawnerMixin:
     def spawn_pipe(self):
         now = time()
-        if now - self.last_spawn_time > self.spawn_rate:
+        last_pipe = self.manager.pipes.sprites()[-1] if self.manager.pipes else None
+
+        if last_pipe:
+            last_pipe_x = last_pipe.rect.right
+        else:
+            last_pipe_x = 0
+
+        if now - self.last_spawn_time > self.spawn_rate \
+                and SCREEN_WIDTH - last_pipe_x > self.pipes_x_offset:
             pipes = self.create_pipes()
 
             if pipes:
@@ -36,13 +46,13 @@ class PipeSpawnerMixin:
         color = r.choice(list(pipe_spritesheet.keys()))
 
         return [
-            Pipe(x, y_upside_down, color, upside_down=True, speed=speed),
-            Pipe(x, y_normal, color, upside_down=False, speed=speed)
-        ]
+                Pipe(x, y_upside_down, color, upside_down=True, speed=speed),
+                Pipe(x, y_normal, color, upside_down=False, speed=speed)
+            ]
 
     @property
     def pipes_offset(self) -> int:
-        return r.randint(self.min_pipes_offset, self.max_pipes_offset) // 2
+        return r.randint(self.min_pipes_y_offset, self.max_pipes_y_offset) // 2
 
     @staticmethod
     def is_placed_out_of_deadzone(*y_positions) -> bool:

@@ -1,10 +1,11 @@
 from random import randint
 from typing import Union, Optional
-from src.resources.music import music
+
 import pygame as pg
 from pygame.mixer import Sound
 
 from src.core.game.settings import SFX_VOLUME, MUSIC_VOLUME
+from src.resources.music import music
 from src.resources.sounds import sfx
 
 
@@ -35,6 +36,11 @@ class AudioPlayer:
     @staticmethod
     def play_music(loops: int = 0, start: float = 0.0) -> None:
         pg.mixer.music.play(loops=loops, start=start)
+
+    @staticmethod
+    def is_playing_music() -> bool:
+        print(pg.mixer.music.get_busy())
+        return pg.mixer.music.get_busy()
 
     @staticmethod
     def pause_music():

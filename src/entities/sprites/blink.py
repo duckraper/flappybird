@@ -1,6 +1,6 @@
-import pygame as pg
-
 from time import time
+
+import pygame as pg
 
 from src.core.game.settings import SCREEN_SIZE
 from src.entities.sprites.abstracts import SolidSprite, CommonSprite

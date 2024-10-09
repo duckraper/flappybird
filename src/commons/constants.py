@@ -1,6 +1,6 @@
 import pygame as pg
 
-from src.core.game.settings import SCREEN_HEIGHT, BASE_DIR, SCREEN_WIDTH
+from src.core.game.settings import SCREEN_HEIGHT, BASE_DIR
 
 DEFAULT_SPRITE_SIZE: tuple[int, int] = (SCREEN_HEIGHT // 15, SCREEN_HEIGHT // 15)
 
@@ -29,7 +29,7 @@ COLORS = {
     "honeydew": (225, 239, 230)
 }
 
-BASE_COLOR = COLORS['honeydew']
+BASE_COLOR = COLORS['black']
 
 DEFAULT_TITLE_FONT_SIZE = 150
 DEFAULT_TITLE_FONT_COLOR = 'white'

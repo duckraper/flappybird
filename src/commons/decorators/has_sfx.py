@@ -1,6 +1,6 @@
 import functools
-
 from typing import Union
+
 from src.commons.audio_player import AudioPlayer
 
 

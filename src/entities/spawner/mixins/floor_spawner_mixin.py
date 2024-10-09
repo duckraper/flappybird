@@ -1,5 +1,5 @@
-from src.commons.constants import FLOOR_WIDTH, SCREEN_WIDTH
-from src.commons.constants import FLOOR_Y
+from src.commons.constants import FLOOR_Y, FLOOR_WIDTH
+from src.core.game.settings import SCREEN_WIDTH
 from src.entities.sprites.floor import Floor
 
 

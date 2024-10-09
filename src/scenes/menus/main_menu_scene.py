@@ -1,21 +1,19 @@
 from enum import IntEnum
 
-from src.commons.audio_player import AudioPlayer
 from src.core.game.settings import DIFFICULTY_LEVELS
-from src.resources.music import music
 from src.scenes.game.game_scene import GameScene
 from src.scenes.menus.abstracts.base_menu_scene import BaseMenuScene
 
 
 class MainMenuScene(BaseMenuScene):
-    def __init__(self, game):
+    def __init__(self, game, **kwargs):
         options_list = [
             "Start",
             "Difficulty: {i}",
             "High Scores",
             "Quit"
         ]
-        super().__init__(game, game.title, *options_list)
+        super().__init__(game, game.title, *options_list, **kwargs)
         self.update_options_list()
 
     def startup(self):
@@ -33,10 +31,9 @@ class MainMenuScene(BaseMenuScene):
         ]
         self.manager.menu_option = IntEnum('Option', self.options_list)
 
-
     def perform_start(self):
+        self.game.scenes_stack.push(self)
         self.change_scene(GameScene(game=self.game))
-        # todo: establecer un fondo en cambios de escenas
 
     def perform_difficulty(self):
         difficulties = list(DIFFICULTY_LEVELS.keys())
@@ -47,7 +44,8 @@ class MainMenuScene(BaseMenuScene):
     def perform_high_scores(self):
         from .high_scores_scene import HighScoresScene
 
-        self.change_scene(HighScoresScene(game=self.game))
+        self.game.scenes_stack.push(self)
+        self.change_scene(HighScoresScene(game=self.game, background=self.background.copy()))
 
     def perform_quit(self):
         self.game.stop_running()

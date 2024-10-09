@@ -1,9 +1,11 @@
 import pygame as pg
+from pygame import SurfaceType
 
 from src.commons.audio_player import AudioPlayer
-from src.commons.helpers import is_pressed
-from src.scenes.game.renderers import ScoreRenderer
+from src.commons.helpers import is_pressed, darken_image
+from src.entities.sprites.background import Background
 from src.scenes.abstracts.base_scene import BaseScene
+from src.scenes.game.renderers import ScoreRenderer
 from src.scenes.managers.game_flow_manager import GameFlowManager
 from src.scenes.menus.game_over_menu_scene import GameOverScene
 from src.scenes.menus.pause_menu_scene import PauseMenuScene
@@ -28,18 +30,30 @@ class GameScene(BaseScene):
 
     def pause_game(self):
         self.stop_running()
-        self.game.scenes_stack.push(self)
-        self.change_scene(PauseMenuScene(game=self.game))
 
-    def stop_running(self, miliseconds=0):
+        blurred_screen = darken_image(self.__get_actual_frame(), factor=0.25, color='black', alpha=150)
+
+        self.game.scenes_stack.push(self, stop_current=False)
+        self.change_scene(PauseMenuScene(game=self.game,
+                                         background=Background(
+                                             blurred_screen,
+                                             vx=0)))
+
+    def stop_running(self):
         super().stop_running()
         AudioPlayer.pause_music()
-        if miliseconds > 0:
-            pg.time.delay(miliseconds)
+
+    def __get_actual_frame(self) -> SurfaceType:
+        return self.game.get_screen().copy()
 
     def perform_game_over(self):
-        self.stop_running(300)
-        self.game.set_scene(GameOverScene(game=self.game))
+        self.stop_running()
+        blurred_screen = darken_image(self.__get_actual_frame(), factor=0.25, color='red', alpha=150)
+
+        self.game.set_scene(GameOverScene(game=self.game,
+                                          background=Background(
+                                                blurred_screen,
+                                                vx=0)))
 
     def draw(self, *args, **kwargs):
         super().draw(bg_color='sky_blue')

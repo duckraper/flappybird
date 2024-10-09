@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from enum import IntEnum
 
 import pygame as pg
@@ -12,8 +12,8 @@ UP, DOWN = (-1, 1)
 
 class BaseMenuScene(BaseScene,
                     ABC):
-    def __init__(self, game, menu_title, *options):
-        super().__init__(game)
+    def __init__(self, game, menu_title, *options, **kwargs):
+        super().__init__(game, vx=5, **kwargs)
         self.title = menu_title
         self.options_list = IntEnum('Options', options)
         self.manager = MenuActionsManger(self, options)
@@ -24,12 +24,13 @@ class BaseMenuScene(BaseScene,
         pass
 
     def draw(self, *args, **kwargs):
-        super().draw(bg='sky_blue')
+        super().draw()
 
         self.manager.draw_menu(self.game.screen,
                                 title_shadow_width=5)
 
     def update(self, *args, **kwargs):
+        super().update()
         self._get_input()
 
     def _get_input(self):

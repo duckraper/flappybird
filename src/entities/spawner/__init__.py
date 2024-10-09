@@ -18,8 +18,9 @@ class EntitiySpawner(BirdSpawnerMixin,
 
         self.game_speed = self.manager.game_speed
 
-        self.min_pipes_offset = self.manager.get_game_prop('min_pipes_offset')
-        self.max_pipes_offset = self.manager.get_game_prop('max_pipes_offset')
+        self.min_pipes_y_offset = self.manager.get_game_prop('min_pipes_y_offset')
+        self.max_pipes_y_offset = self.manager.get_game_prop('max_pipes_y_offset')
+        self.pipes_x_offset = self.manager.get_game_prop('pipes_x_offset')
 
     def __call__(self, entity_type: str) -> Sprite | list[Sprite]:
         return self.spawn(entity_type)

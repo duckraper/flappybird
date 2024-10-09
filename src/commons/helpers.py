@@ -1,11 +1,21 @@
 import pygame as pg
 
-from time import time
-
 from src.core.game.settings import KEY_BINDINGS, DIFFICULTY_LEVELS, DIFFICULTY
 from .constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
 
 
+def darken_image(image: pg.Surface, factor: float = 0.5, color: tuple | str = 'black', alpha: int = 128) -> pg.Surface:
+    color = get_color(color)
+
+    image = image.copy()
+    for x in range(image.get_width()):
+        for y in range(image.get_height()):
+            r, g, b, a = image.get_at((x, y))
+            new_r = int(r * factor + color[0] * (1 - factor))
+            new_g = int(g * factor + color[1] * (1 - factor))
+            new_b = int(b * factor + color[2] * (1 - factor))
+            image.set_at((x, y), (new_r, new_g, new_b, alpha))
+    return image
 
 def get_difficulty_prop(prop, difficulty=DIFFICULTY):
     return DIFFICULTY_LEVELS[difficulty][prop]
