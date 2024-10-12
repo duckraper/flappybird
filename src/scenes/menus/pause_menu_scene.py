@@ -8,7 +8,7 @@ class PauseMenuScene(BaseMenuScene):
             'Restart',
             'Main Menu'
         ]
-        super().__init__(game, 'Paused Game', *options_list, **kwargs)
+        super().__init__(game, 'Paused Game', None, *options_list, **kwargs)
 
     def perform_resume(self):
         self.stop_running()
@@ -16,7 +16,6 @@ class PauseMenuScene(BaseMenuScene):
         game_scene = self.game.scenes_stack.pop(start_current=False)
 
         self.change_scene(game_scene)
-
 
     def perform_restart(self):
         scene = self.game.scenes_stack.pop()

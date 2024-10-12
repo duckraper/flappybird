@@ -3,7 +3,6 @@ from src.core.game.settings import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class ScoreRenderer(BaseTextRenderer):
-    # todo: integrar con score_manager
     def __init__(self, scene):
         super().__init__()
         self.scene: 'GameScene' = scene

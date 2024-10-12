@@ -1,6 +1,4 @@
-import os
 import random as r
-
 from time import time
 
 from src.commons.constants import INGAME_DEADZONE
@@ -46,9 +44,9 @@ class PipeSpawnerMixin:
         color = r.choice(list(pipe_spritesheet.keys()))
 
         return [
-                Pipe(x, y_upside_down, color, upside_down=True, speed=speed),
-                Pipe(x, y_normal, color, upside_down=False, speed=speed)
-            ]
+            Pipe(x, y_upside_down, color, upside_down=True, speed=speed),
+            Pipe(x, y_normal, color, upside_down=False, speed=speed)
+        ]
 
     @property
     def pipes_offset(self) -> int:

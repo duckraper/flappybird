@@ -89,4 +89,3 @@ KEY_BINDINGS = {
     'right': pg.K_RIGHT,
     'enter': pg.K_RETURN
 }
-

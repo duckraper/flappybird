@@ -20,6 +20,7 @@ class Pipe(SolidSprite,
             CommonSprite.__init__(self, image, x, y, midtop=(x, y))
 
         self.spawn_time = time()
+        self.is_mirror = upside_down
 
     def constraints(self):
         if self.rect.right < 0:

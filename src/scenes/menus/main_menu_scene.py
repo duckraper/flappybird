@@ -13,7 +13,7 @@ class MainMenuScene(BaseMenuScene):
             "High Scores",
             "Quit"
         ]
-        super().__init__(game, game.title, None,*options_list, **kwargs)
+        super().__init__(game, game.title, None, *options_list, **kwargs)
         self.update_options_list()
 
     def startup(self):
@@ -35,6 +35,9 @@ class MainMenuScene(BaseMenuScene):
         self.game.scenes_stack.push(self)
         self.change_scene(GameScene(game=self.game))
 
+    def update(self, *args, **kwargs):
+        super().update()
+
     def perform_difficulty(self):
         difficulties = list(DIFFICULTY_LEVELS.keys())
         current_index = difficulties.index(self.game.difficulty)
@@ -45,7 +48,7 @@ class MainMenuScene(BaseMenuScene):
         from .high_scores_scene import HighScoresScene
 
         self.game.scenes_stack.push(self)
-        self.change_scene(HighScoresScene(game=self.game, background=self.background.copy()))
+        self.change_scene(HighScoresScene(game=self.game, background=self.background))
 
     def perform_quit(self):
         self.game.stop_running()

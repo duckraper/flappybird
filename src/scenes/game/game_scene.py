@@ -18,8 +18,6 @@ class GameScene(BaseScene):
         self.manager = GameFlowManager(self)
         self.score_render = ScoreRenderer(self)
 
-        self.x = 0
-
     def _get_input(self):
         keydown_events = pg.event.get(eventtype=(pg.KEYDOWN,))
 
@@ -52,16 +50,16 @@ class GameScene(BaseScene):
 
         self.game.set_scene(GameOverScene(game=self.game,
                                           background=Background(
-                                                blurred_screen,
-                                                vx=0)))
+                                              blurred_screen,
+                                              vx=0),
+                                          score=self.manager.score))
 
     def draw(self, *args, **kwargs):
-        super().draw(bg_color='sky_blue')
+        super().draw(bg_color='white')
         self.manager.draw_all_sprites()
         self.score_render()
 
     def update(self, *args, **kwargs):
-        self.x -= 0.01
         self._get_input()
 
         if self.running:

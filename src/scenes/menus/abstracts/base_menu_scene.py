@@ -21,7 +21,7 @@ class BaseMenuScene(BaseScene,
         self.title = menu_title
         self.captions = captions
         self.options_list = IntEnum('Options', options)
-        self.manager = MenuActionsManger(self, options)
+        self.manager = MenuActionsManger(self, options, **kwargs)
 
         self.startup()
 
@@ -32,7 +32,9 @@ class BaseMenuScene(BaseScene,
         super().draw()
 
         self.manager.draw_menu(self.game.screen,
-                                title_shadow_width=5)
+                               title_shadow_width=5,
+                               title_y_offset=20,
+                               **kwargs)
 
     def update(self, *args, **kwargs):
         super().update()

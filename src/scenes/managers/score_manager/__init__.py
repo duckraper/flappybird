@@ -1,7 +1,7 @@
+from datetime import datetime
 from typing import List, Union, Dict
 
 from dataclass_csv import DataclassReader, DataclassWriter
-from datetime import datetime
 
 from src.core.game.settings import DATA_DIR
 from src.resources.dataclasses import ScoreRecord
@@ -34,7 +34,7 @@ class ScoreManager:
             id=len(self.scores) + 1,
             score=score,
             difficulty=self.game.difficulty,
-            date=datetime.now()  # str(datetime.now().strftime('%H:%M:%S %d-%m-%Y'))
+            date=str(datetime.now())  # str(datetime.now().strftime('%H:%M:%S %d-%m-%Y'))
         )
         self.scores.append(new_record.__dict__)
 
@@ -60,9 +60,9 @@ class ScoreManager:
 
     def get_highest_score(self) -> int:
         return max((
-                score['score']
-                for score in self.scores
-                if score['difficulty'] == self.game.difficulty
-            ),
-            default = 0
+            score['score']
+            for score in self.scores
+            if score['difficulty'] == self.game.difficulty
+        ),
+            default=0
         )

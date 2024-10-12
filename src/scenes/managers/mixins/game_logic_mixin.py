@@ -1,6 +1,6 @@
 from src.commons.decorators import has_sfx
 from src.commons.helpers import get_color
-from src.core.game.settings import SCORE_VOLUME, HIT_VOLUME, DIE_VOLUME
+from src.core.game.settings import SCORE_VOLUME, HIT_VOLUME
 from src.entities import Pipe
 from src.entities.sprites import Bird
 from src.entities.sprites.abstracts import MovingSprite
@@ -19,9 +19,10 @@ class GameLogicMixin:
     def check_score(self):
         for pipe in self.pipes:
             if (not getattr(pipe, 'scored', False)
-            #! todo: se esta lanzando doble el score: fix
+                    and not pipe.is_mirror
                     and self.bird.sprite.rect.left > pipe.rect.right):
                 self.perform_score(pipe)
+                pipe.scored = True
                 if self.score % 5 == 0:
                     self.harden_game()
                     self.last_hardened_score = self.score

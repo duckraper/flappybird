@@ -10,5 +10,7 @@ def has_sfx(sfx: Union[str, 'Sound', 'SoundType'], volume: float = 1.0):
         def wrapper(*args, **kwargs):
             AudioPlayer.play_sound(sfx, volume)
             return func(*args, **kwargs)
+
         return wrapper
+
     return decorator

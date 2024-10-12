@@ -23,7 +23,7 @@ class AudioPlayer:
         sound.play(loops=loops, maxtime=maxtime, fade_ms=fade_ms)
 
     @staticmethod
-    def set_music(filepath: Optional[Union[str, 'Path']] = None, volume: float=MUSIC_VOLUME) -> None:
+    def set_music(filepath: Optional[Union[str, 'Path']] = None, volume: float = MUSIC_VOLUME) -> None:
         if not filepath:
             filepath = music[f'track-0{randint(0, len(music.keys()) - 1)}']
         if not pg.mixer.get_init():

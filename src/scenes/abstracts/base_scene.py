@@ -34,4 +34,5 @@ class BaseScene(IScene, ABC):
         self.background.update(self.game.get_delta())
 
     def draw(self, *args, **kwargs):
-        self.background.draw(self.game.get_screen())
+        if self.running:
+            self.background.draw(self.game.get_screen())

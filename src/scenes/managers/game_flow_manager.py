@@ -23,11 +23,10 @@ class GameFlowManager(SpriteManagerMixin,
 
         self.score_manager = self.scene.game.score_manager
 
-
         self.game_speed = self.get_game_prop('speed')
         self.spawn_rate = self.get_game_prop('spawn_rate')
         self.difficulty = self.scene.game.difficulty
-        
+
         self.hardened_value = 0
 
         self.max_pipes_offset = self.get_game_prop('max_pipes_y_offset')
@@ -45,7 +44,7 @@ class GameFlowManager(SpriteManagerMixin,
         self.floor = pg.sprite.Group()
         self.bird = pg.sprite.GroupSingle(bird)
         self.background = Background(image=choice(backgrounds).copy(),
-                                     vx=BG_SPEED)
+                                     vx=BG_SPEED, dx=-1)
 
         self.sprites = pg.sprite.LayeredUpdates()
 

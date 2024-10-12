@@ -2,10 +2,8 @@ from random import choice
 
 from src.commons.audio_player import AudioPlayer
 from src.commons.constants import JUMP_FORCE
-from src.commons.decorators import has_sfx
 from src.commons.helpers import is_between
-from src.core.game.settings import SCREEN_HEIGHT, FLAP_VOLUME, DIE_VOLUME
-
+from src.core.game.settings import SCREEN_HEIGHT, FLAP_VOLUME
 from src.entities.sprites.abstracts import AnimatedSprite, CollidableSprite, BaseSprite, MovingSprite
 from src.resources.spritesheets import bird_spritesheet
 

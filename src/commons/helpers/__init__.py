@@ -1,8 +1,8 @@
 import pygame as pg
 
 from src.core.game.settings import KEY_BINDINGS, DIFFICULTY_LEVELS, DIFFICULTY
-from ..constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
 from .encoder import encode, decode
+from ..constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
 
 
 def darken_image(image: pg.Surface, factor: float = 0.5, color: tuple | str = 'black', alpha: int = 128) -> pg.Surface:
@@ -18,8 +18,10 @@ def darken_image(image: pg.Surface, factor: float = 0.5, color: tuple | str = 'b
             image.set_at((x, y), (new_r, new_g, new_b, alpha))
     return image
 
+
 def get_difficulty_prop(prop, difficulty=DIFFICULTY):
     return DIFFICULTY_LEVELS[difficulty][prop]
+
 
 def is_pressed(events, key: str | list[str] = 'any') -> bool:
     try:

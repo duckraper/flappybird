@@ -6,7 +6,7 @@ from src.scenes.managers.mixins import MenuRendererMixin
 
 
 class MenuActionsManger(MenuRendererMixin):
-    def __init__(self, menu: 'BaseMenuScene', *options):
+    def __init__(self, menu: 'BaseMenuScene', *options, **kwargs):
         self.menu = menu
         self.menu_title = menu.title
         self.captions = menu.captions
@@ -29,7 +29,6 @@ class MenuActionsManger(MenuRendererMixin):
         else:
             raise AttributeError(f"Method {method_name} not found")
         self.menu.update_options_list()
-
 
     @has_sfx(sfx='swoosh', volume=SWOOSH_VOLUME)
     def update_selected_option(self, direction):
