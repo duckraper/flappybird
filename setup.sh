@@ -9,6 +9,7 @@ pyinstaller --noconfirm --log-level=WARN \
     --onefile --nowindow \
     --add-data="README.md:." \
     --add-data "assets:assets" \
+    --add-data "data:data" \
     --icon=assets/img.ico \
     --name=flappybird \
     main.py

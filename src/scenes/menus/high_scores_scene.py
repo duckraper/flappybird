@@ -22,7 +22,6 @@ class HighScoresScene(BaseMenuScene):
         )
         header = '  o        Date         Score'
         table = [header] + scores_list
-        print(len(scores_list[0]))
         super().__init__(game, 'HighScores', [*table], *options_list, **kwargs)
 
     def startup(self):
