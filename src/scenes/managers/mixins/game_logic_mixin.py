@@ -19,6 +19,7 @@ class GameLogicMixin:
     def check_score(self):
         for pipe in self.pipes:
             if (not getattr(pipe, 'scored', False)
+            #! todo: se esta lanzando doble el score: fix
                     and self.bird.sprite.rect.left > pipe.rect.right):
                 self.perform_score(pipe)
                 if self.score % 5 == 0:

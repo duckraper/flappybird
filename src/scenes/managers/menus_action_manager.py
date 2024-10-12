@@ -9,6 +9,7 @@ class MenuActionsManger(MenuRendererMixin):
     def __init__(self, menu: 'BaseMenuScene', *options):
         self.menu = menu
         self.menu_title = menu.title
+        self.captions = menu.captions
 
         self.menu_option = IntEnum('Option', *options)
         self.selected_option = 1
@@ -37,4 +38,3 @@ class MenuActionsManger(MenuRendererMixin):
     @property
     def selected_option_name(self) -> str:
         return self.menu_option(self.selected_option).name
-

@@ -9,6 +9,7 @@ from src.core.events import GameEvent
 from src.core.game.settings import FPS, DIFFICULTY_LEVELS, SCREEN_SIZE, GAME_TITLE
 from src.core.mixins import EventManagerMixin, SceneManagerMixin, SettingsManagerMixin
 from src.core.mixins.delta_time_manager_mixin import DeltaTimeManagerMixin
+from src.scenes.managers.score_manager import ScoreManager
 from src.entities.sprites.background import Background
 from src.resources.backgrounds import backgrounds
 from src.scenes.menus.main_menu_scene import MainMenuScene
@@ -39,6 +40,8 @@ class Game(EventManagerMixin,
 
         self.difficulty = 'medium'
 
+        self.score_manager = ScoreManager(self)
+
         if self.exists_config():
             self.import_config()
 
@@ -58,6 +61,8 @@ class Game(EventManagerMixin,
         self.set_scene(MainMenuScene(game=self, background=Background(self.menus_bg_img.copy(), vx=-100)))
 
     def stop_running(self):
+        self.score_manager.save_scores_to_file()
+
         self.running = False
 
     def get_screen(self):

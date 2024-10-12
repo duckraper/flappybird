@@ -26,7 +26,8 @@ COLORS = {
     "gray": (154, 160, 168),
     "red": (135, 27, 27),
     "white": (255, 255, 255),
-    "honeydew": (225, 239, 230)
+    "honeydew": (225, 239, 230),
+    "gold": (255, 215, 0),
 }
 
 BASE_COLOR = COLORS['black']

@@ -15,6 +15,16 @@ class MenuRendererMixin(BaseTextRenderer):
             'shadow_width': kwargs.get('title_shadow_width', DEFAULT_SHADOW_WIDTH),
             'outline_color': kwargs.get('title_outline_color', DEFAULT_OUTLINE_COLOR)
         }
+
+        caption_params = {
+            'font_color': kwargs.get('caption_font_color', DEFAULT_OPTION_FONT_COLOR),
+            'font_size': kwargs.get('caption_font_size', DEFAULT_OPTION_FONT_SIZE),
+            'options_offset': kwargs.get('caption_options_offset', DEFAULT_OPTIONS_OFFSET),
+            'outline_width': kwargs.get('caption_outline_width', DEFAULT_OUTLINE_WIDTH),
+            'shadow_width': kwargs.get('caption_shadow_width', DEFAULT_SHADOW_WIDTH),
+            'outline_color': kwargs.get('caption_outline_color', DEFAULT_OUTLINE_COLOR)
+        }
+
         option_params = {
             'font_color': kwargs.get('option_font_color', DEFAULT_OPTION_FONT_COLOR),
             'font_size': kwargs.get('option_font_size', DEFAULT_OPTION_FONT_SIZE),
@@ -27,7 +37,7 @@ class MenuRendererMixin(BaseTextRenderer):
         }
 
         self._draw_title(screen, screen_width, screen_height, **title_params)
-        self._draw_captions()
+        self._draw_captions(screen, screen_width, screen_height, **caption_params)
         self._draw_options(screen, screen_width, screen_height, **option_params)
 
     def _draw_title(self, screen, screen_width, screen_height, font_size, font_color, outline_width, shadow_width,
@@ -36,8 +46,14 @@ class MenuRendererMixin(BaseTextRenderer):
                     font_color=font_color, outline_width=outline_width, shadow_width=shadow_width,
                     outline_color=outline_color)
 
-    def _draw_captions(self):
-        pass
+    def _draw_captions(self, screen, screen_width, screen_height, font_color, font_size, options_offset, outline_width, shadow_width, outline_color):
+        for caption_index, caption in enumerate(self.captions):
+            print(caption)
+            x = screen_width // 2
+            y = screen_height // 3 + caption_index * options_offset
+
+            self.render(screen, (x, y), caption, font_size=font_size, font_color=font_color,
+                        outline_width=outline_width, shadow_width=shadow_width, outline_color=outline_color)
 
     def _draw_options(self, screen, screen_width, screen_height, font_color, font_size, hover_font_color,
                       hover_font_size, options_offset, outline_width, shadow_width, outline_color):

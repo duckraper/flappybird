@@ -12,9 +12,14 @@ UP, DOWN = (-1, 1)
 
 class BaseMenuScene(BaseScene,
                     ABC):
-    def __init__(self, game, menu_title, *options, **kwargs):
+    def __init__(self, game, menu_title, captions=None, *options, **kwargs):
         super().__init__(game, vx=5, **kwargs)
+
+        if captions is None:
+            captions = []
+
         self.title = menu_title
+        self.captions = captions
         self.options_list = IntEnum('Options', options)
         self.manager = MenuActionsManger(self, options)
 

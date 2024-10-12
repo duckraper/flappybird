@@ -8,7 +8,7 @@ class GameOverScene(BaseMenuScene):
         title = 'GameOver'
         options_list = ('Restart', 'Quit')
 
-        super().__init__(game, title, *options_list, **kwargs)
+        super().__init__(game, title, ['asdasd'], *options_list, **kwargs)
 
     def perform_restart(self):
         from ..game.game_scene import GameScene

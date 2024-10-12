@@ -1,7 +1,8 @@
 import pygame as pg
 
 from src.core.game.settings import KEY_BINDINGS, DIFFICULTY_LEVELS, DIFFICULTY
-from .constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
+from ..constants import FONT_FILENAME, FONTS_DIR, DEFAULT_FONT_SIZE, COLORS
+from .encoder import encode, decode
 
 
 def darken_image(image: pg.Surface, factor: float = 0.5, color: tuple | str = 'black', alpha: int = 128) -> pg.Surface:

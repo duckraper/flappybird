@@ -13,7 +13,7 @@ class MainMenuScene(BaseMenuScene):
             "High Scores",
             "Quit"
         ]
-        super().__init__(game, game.title, *options_list, **kwargs)
+        super().__init__(game, game.title, None,*options_list, **kwargs)
         self.update_options_list()
 
     def startup(self):
