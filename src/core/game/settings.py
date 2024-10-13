@@ -10,7 +10,7 @@ config = cp.ConfigParser()
 config.read(DATA_DIR / 'config.ini')
 
 # screne confg
-FPS = 120
+FPS = 60
 GAME_TITLE = 'FlappyBird'
 GAME_ICON = pg.image.load(BASE_DIR.parent / 'assets' / 'img.ico')
 

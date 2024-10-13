@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if ! command -v pyinstaller &> /dev/null
 then
     echo "PyInstaller could not be found"
@@ -6,10 +8,10 @@ then
 fi
 
 pyinstaller --noconfirm --log-level=WARN \
-    --onefile --nowindow \
+    --nowindow \
     --add-data="README.md:." \
     --add-data "assets:assets" \
     --add-data "data:data" \
     --icon=assets/img.ico \
     --name=flappybird \
-    main.py
+    ./src/main.py
